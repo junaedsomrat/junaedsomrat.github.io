@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Junaed Islam Somrat - Portfolio</title>
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="favicon.png">
+    
+    <!-- Firebase Compat SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore-compat.js"></script>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@300;400;600;700&family=Noto+Serif+Bengali:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: { primary: '#1E3A8A', secondary: '#3B82F6', accent: '#DBEAFE', bgLight: '#F8FAFC' },
+                    fontFamily: { 
+                        sans: ['"Noto Sans"', '"Noto Serif Bengali"', 'sans-serif'], 
+                        bengali: ['"Noto Serif Bengali"', '"Noto Sans"', 'serif'] 
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Base Styles & Background */
+        body { background-color: transparent; color: #1e293b; overflow-x: hidden; scroll-behavior: smooth; top: 0 !important; }
+       
+        /* Hide Google Translate Default UI completely */
+        .skiptranslate, #google_translate_element { display: none !important; }
+        
+        /* Animated Background Waves */
+        .wave-container { position: fixed; bottom: 0; left: 0; width: 100%; height: 100vh; z-index: -1; background: linear-gradient(to bottom, #F8FAFC, #eff6ff); overflow: hidden; }
+        .wave { position: absolute; bottom: 0; left: 0; width: 200%; height: 150px; background: url('data:image/svg+xml;utf8,<svg viewBox="0 0 1440 320" xmlns="http://www.w3.org/2000/svg"><path fill="%23DBEAFE" fill-opacity="0.6" d="M0,192L48,197.3C96,203,192,213,288,197.3C384,181,480,139,576,138.7C672,139,768,181,864,197.3C960,213,1056,203,1152,176C1248,149,1344,107,1392,85.3L1440,64L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>') repeat-x; background-size: 50% 100%; animation: waveAnimation 15s linear infinite; }
+        .wave:nth-child(2) { bottom: 10px; opacity: 0.5; animation: waveAnimation 20s linear infinite reverse; }
+        .wave:nth-child(3) { bottom: 20px; opacity: 0.2; animation: waveAnimation 10s linear infinite; }
+
+        @keyframes waveAnimation { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+        .reveal { opacity: 0; transform: translateY(40px); transition: all 0.8s cubic-bezier(0.25, 1, 0.5, 1); }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+        .page-view { display: none; animation: fadeInPage 0.5s ease forwards; }
+        .page-view.active { display: block; }
+        @keyframes fadeInPage { from { opacity: 0; } to { opacity: 1; } }
+
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #94a3b8; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #64748b; }
+
+        [dir="rtl"] { text-align: right; }
+    </style>
+</head>
+<body class="font-bengali antialiased min-h-screen flex flex-col transition-colors duration-300 relative">
+
+    <!-- Hidden Google Translate Element -->
+    <div id="google_translate_element"></div>
+
+    <!-- Background Animation -->
+    <div class="wave-container"><div class="wave"></div><div class="wave"></div><div class="wave"></div></div>
+
+    <!-- Navigation Bar -->
+    <nav class="fixed w-full top-0 z-50 bg-white/70 backdrop-blur-lg border-b border-blue-100 shadow-sm transition-all duration-300">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                
+                <!-- Logo -->
+                <div class="flex-shrink-0 flex items-center cursor-pointer" onclick="navigate('home')">
+                    <div class="w-10 h-10 rounded-full overflow-hidden border-2 border-secondary mr-3 shadow-sm hover:scale-110 transition-transform">
+                        <img id="nav-profile-img" src="" alt="Junaed" class="w-full h-full object-cover">
+                    </div>
+                    <span class="font-bold text-xl tracking-tight text-primary hover:text-secondary transition-colors" id="nav-logo">Junaed.</span>
+                </div>
+
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex space-x-8 items-center" dir="ltr">
+                    <a href="#home" onclick="navigate('home')" class="text-gray-600 hover:text-secondary font-medium transition-colors">Home</a>
+                    <a href="#home" onclick="navigate('home'); setTimeout(()=>document.getElementById('about-section').scrollIntoView(), 100);" class="text-gray-600 hover:text-secondary font-medium transition-colors">About</a>
+                    <a href="#portfolio" onclick="navigate('portfolio')" class="text-gray-600 hover:text-secondary font-medium transition-colors">Portfolio</a>
+                    <a href="#blog" onclick="navigate('blog')" class="text-gray-600 hover:text-secondary font-medium transition-colors">Blog</a>
+                    <a href="#contact" onclick="navigate('contact')" class="text-gray-600 hover:text-secondary font-medium transition-colors">Contact</a>
+                    
+                    <!-- Language Selector -->
+                    <div class="relative group">
+                        <button class="flex items-center space-x-1 text-gray-600 hover:text-secondary focus:outline-none p-2 rounded-full hover:bg-blue-50 transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129" /></svg>
+                        </button>
+                        <div class="absolute right-0 mt-2 w-32 bg-white border border-gray-100 rounded-xl shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 overflow-hidden z-50">
+                            <button onclick="setLanguage('en')" class="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-primary">English</button>
+                            <button onclick="setLanguage('bn')" class="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-primary">বাংলা</button>
+                            <button onclick="setLanguage('hi')" class="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-primary">हिन्दी</button>
+                            <button onclick="setLanguage('ar')" class="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-primary">العربية</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center space-x-4">
+                    <button onclick="toggleMobileLang()" class="text-gray-600 hover:text-secondary focus:outline-none">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129" /></svg>
+                    </button>
+                    <button onclick="toggleMobileMenu()" class="text-gray-600 hover:text-secondary focus:outline-none">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" /></svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div id="mobile-lang-menu" class="hidden md:hidden bg-white border-b border-gray-100 px-4 py-2 space-y-1 shadow-inner">
+            <button onclick="setLanguage('en'); toggleMobileLang()" class="block w-full text-center px-4 py-2 text-sm text-gray-700 bg-gray-50 rounded-lg">English</button>
+            <button onclick="setLanguage('bn'); toggleMobileLang()" class="block w-full text-center px-4 py-2 text-sm text-gray-700 bg-gray-50 rounded-lg">বাংলা</button>
+            <button onclick="setLanguage('hi'); toggleMobileLang()" class="block w-full text-center px-4 py-2 text-sm text-gray-700 bg-gray-50 rounded-lg">हिन्दी</button>
+            <button onclick="setLanguage('ar'); toggleMobileLang()" class="block w-full text-center px-4 py-2 text-sm text-gray-700 bg-gray-50 rounded-lg">العربية</button>
+        </div>
+
+        <div id="mobile-menu" class="hidden md:hidden bg-white/95 backdrop-blur-md border-b border-gray-100 shadow-lg">
+            <div class="px-4 pt-2 pb-6 space-y-2 text-center" dir="ltr">
+                <a href="#home" onclick="navigate('home'); toggleMobileMenu()" class="block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-secondary hover:bg-blue-50">Home</a>
+                <a href="#portfolio" onclick="navigate('portfolio'); toggleMobileMenu()" class="block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-secondary hover:bg-blue-50">Portfolio</a>
+                <a href="#blog" onclick="navigate('blog'); toggleMobileMenu()" class="block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-secondary hover:bg-blue-50">Blog</a>
+                <a href="#contact" onclick="navigate('contact'); toggleMobileMenu()" class="block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-secondary hover:bg-blue-50">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content Area -->
+    <main class="flex-grow pt-24 pb-12 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto w-full z-10 relative">
+        
+        <section id="home" class="page-view active">
+            <!-- Hero Section -->
+            <div class="flex flex-col items-center justify-center pt-10 pb-20 text-center reveal active">
+                <div class="relative w-40 h-40 sm:w-48 sm:h-48 mb-8 rounded-full p-2 bg-white shadow-xl hover:scale-105 transition-transform duration-500">
+                    <img id="main-profile-img" src="" alt="Profile" class="rounded-full w-full h-full object-cover border-4 border-accent">
+                    <div class="absolute bottom-2 right-2 bg-secondary text-white p-2 rounded-full shadow-lg border-2 border-white">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" /></svg>
+                    </div>
+                </div>
+
+                <h1 id="site-name" class="text-4xl sm:text-5xl md:text-6xl font-bold text-primary mb-4">Loading...</h1>
+                <p id="site-subtitle" class="text-xl sm:text-2xl text-gray-600 mb-6 font-light">...</p>
+                <p id="site-intro" class="max-w-2xl mx-auto text-gray-500 mb-8 leading-relaxed text-lg">...</p>
+
+                <div class="flex flex-wrap justify-center gap-4">
+                    <button onclick="document.getElementById('about-section').scrollIntoView()" class="px-8 py-3 bg-primary text-white font-medium rounded-full shadow-lg hover:bg-secondary hover:shadow-xl transition-all duration-300 flex items-center gap-2">
+                        <span>Know More</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" /></svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- About Section -->
+            <div id="about-section" class="bg-white/80 backdrop-blur-md rounded-3xl shadow-lg border border-white/50 p-8 sm:p-12 mb-16 reveal">
+                <div class="text-center mb-10">
+                    <h2 class="text-3xl font-bold text-primary mb-3">About Me</h2>
+                    <div class="w-16 h-1 bg-secondary mx-auto rounded-full"></div>
+                </div>
+                <div class="grid md:grid-cols-2 gap-12 items-center">
+                    <div class="space-y-6 text-gray-600 text-lg leading-relaxed">
+                        <p id="about-p1">...</p>
+                        <p>I am currently <strong class="text-secondary text-2xl"><span id="dynamic-age"></span></strong> years old. <span id="about-p2"></span></p>
+                        <p id="about-p3">...</p>
+                    </div>
+                    
+                    <div class="bg-gradient-to-br from-blue-50 to-indigo-50 p-8 rounded-2xl border border-blue-100/50 shadow-inner">
+                        <h3 class="font-bold text-xl text-primary mb-6">My Expertise</h3>
+                        <ul class="space-y-5">
+                            <li class="flex items-center gap-4">
+                                <div class="w-12 h-12 rounded-full bg-white flex items-center justify-center text-secondary shadow-md">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" /></svg>
+                                </div>
+                                <span id="skill-1" class="font-medium text-gray-800 text-lg">...</span>
+                            </li>
+                            <li class="flex items-center gap-4">
+                                <div class="w-12 h-12 rounded-full bg-white flex items-center justify-center text-secondary shadow-md">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.121 14.121L19 19m-7-7l7-7m-7 7l-2.879 2.879M12 12L9.121 9.121m0 5.758a3 3 0 10-4.243 4.243 3 3 0 004.243-4.243zm0-5.758a3 3 0 10-4.243-4.243 3 3 0 004.243 4.243z" /></svg>
+                                </div>
+                                <span id="skill-2" class="font-medium text-gray-800 text-lg">...</span>
+                            </li>
+                            <li class="flex items-center gap-4">
+                                <div class="w-12 h-12 rounded-full bg-white flex items-center justify-center text-secondary shadow-md">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                                </div>
+                                <span id="skill-3" class="font-medium text-gray-800 text-lg">...</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10 reveal">
+                <div onclick="navigate('portfolio')" class="group cursor-pointer bg-white rounded-2xl p-6 shadow-md hover:shadow-xl transition-all flex flex-col items-center text-center border border-gray-100">
+                    <div class="w-16 h-16 bg-blue-50 text-secondary rounded-2xl flex items-center justify-center mb-4 group-hover:bg-secondary group-hover:text-white transition-colors">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z M15 13a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-2">View Portfolio</h3>
+                </div>
+                <div onclick="navigate('blog')" class="group cursor-pointer bg-white rounded-2xl p-6 shadow-md hover:shadow-xl transition-all flex flex-col items-center text-center border border-gray-100">
+                    <div class="w-16 h-16 bg-blue-50 text-secondary rounded-2xl flex items-center justify-center mb-4 group-hover:bg-secondary group-hover:text-white transition-colors">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9.5a2.5 2.5 0 00-2.5-2.5H15M9 11l3 3m0 0l3-3m-3 3V8" /></svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-2">Read Blog</h3>
+                </div>
+                <div onclick="navigate('contact')" class="group cursor-pointer bg-white rounded-2xl p-6 shadow-md hover:shadow-xl transition-all flex flex-col items-center text-center border border-gray-100">
+                    <div class="w-16 h-16 bg-blue-50 text-secondary rounded-2xl flex items-center justify-center mb-4 group-hover:bg-secondary group-hover:text-white transition-colors">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-2">Get in Touch</h3>
+                </div>
+            </div>
+        </section>
+
+        <!-- PORTFOLIO PAGE -->
+        <section id="portfolio" class="page-view">
+            <div class="text-center mb-12 reveal">
+                <h2 class="text-4xl font-bold text-primary mb-4">My Portfolio</h2>
+                <div class="w-16 h-1 bg-secondary mx-auto rounded-full mb-4"></div>
+            </div>
+            <div id="portfolio-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Fetching dynamically -->
+            </div>
+        </section>
+
+        <!-- BLOG LIST PAGE -->
+        <section id="blog" class="page-view">
+            <div class="max-w-4xl mx-auto">
+                <div class="text-center mb-12 reveal">
+                    <h2 class="text-4xl font-bold text-primary mb-4">My Writings</h2>
+                    <div class="w-16 h-1 bg-secondary mx-auto rounded-full mb-4"></div>
+                </div>
+                <div class="space-y-8" id="blog-list-container">
+                    <!-- Fetching dynamically -->
+                </div>
+            </div>
+        </section>
+
+        <!-- SINGLE BLOG POST PAGE -->
+        <section id="single-blog" class="page-view">
+            <div class="max-w-3xl mx-auto bg-white p-8 sm:p-12 rounded-3xl shadow-xl border border-gray-100 relative mt-4 reveal">
+                <button onclick="navigate('blog')" class="absolute top-6 left-6 text-gray-400 hover:text-primary transition-colors flex items-center gap-2 bg-gray-50 px-4 py-2 rounded-full shadow-sm hover:bg-gray-100">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" /></svg>
+                    <span>Back</span>
+                </button>
+                <div class="mt-12 mb-8">
+                    <div class="flex items-center gap-3 mb-6 text-sm text-gray-500">
+                        <span id="sb-tag" class="bg-blue-50 text-secondary px-4 py-1.5 rounded-full font-semibold tracking-wide"></span>
+                        <span>•</span>
+                        <span id="sb-date" class="font-medium"></span>
+                    </div>
+                    <h1 id="sb-title" class="text-3xl sm:text-4xl font-extrabold text-gray-900 leading-tight mb-8"></h1>
+                    <div class="w-full h-px bg-gray-200 mb-8"></div>
+                    <div id="sb-content" class="prose prose-lg text-gray-700 leading-loose space-y-6"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CONTACT PAGE -->
+        <section id="contact" class="page-view">
+            <div class="max-w-3xl mx-auto bg-white rounded-3xl shadow-xl border border-gray-100 overflow-hidden reveal">
+                <div class="bg-primary p-10 text-center text-white relative">
+                    <h2 class="text-4xl font-bold mb-3 relative z-10">Get in Touch</h2>
+                </div>
+                <div class="p-8 sm:p-12">
+                    <form action="https://formsubmit.co/junaedismyname25@gmail.com" method="POST" class="space-y-6">
+                        <input type="hidden" name="_captcha" value="false">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-sm font-semibold text-gray-700 mb-2">Your Name</label>
+                                <input type="text" name="name" required class="w-full px-5 py-4 rounded-xl border border-gray-200 focus:ring-4 focus:ring-blue-100 outline-none bg-gray-50 focus:bg-white" placeholder="John Doe">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-semibold text-gray-700 mb-2">Email Address</label>
+                                <input type="email" name="email" required class="w-full px-5 py-4 rounded-xl border border-gray-200 focus:ring-4 focus:ring-blue-100 outline-none bg-gray-50 focus:bg-white" placeholder="john@example.com">
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-700 mb-2">Subject</label>
+                            <input type="text" name="subject" required class="w-full px-5 py-4 rounded-xl border border-gray-200 focus:ring-4 focus:ring-blue-100 outline-none bg-gray-50 focus:bg-white" placeholder="Business Inquiry">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-700 mb-2">Message</label>
+                            <textarea name="message" rows="5" required class="w-full px-5 py-4 rounded-xl border border-gray-200 focus:ring-4 focus:ring-blue-100 outline-none bg-gray-50 focus:bg-white resize-none" placeholder="Hello..."></textarea>
+                        </div>
+                        <button type="submit" class="w-full py-4 bg-primary text-white text-lg font-bold rounded-xl shadow-lg hover:bg-secondary transition-all flex justify-center items-center gap-2">
+                            <span>Send Message</span>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-white/50 backdrop-blur-sm border-t border-gray-100 py-4 mt-auto relative z-10">
+        <div class="max-w-6xl mx-auto px-4 text-center text-gray-500 text-sm">
+            <p>&copy; <span id="current-year"></span> Junaed Islam Somrat. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Google Translate Script (Hidden UI but powers translations) -->
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({pageLanguage: 'bn', autoDisplay: false}, 'google_translate_element');
+        }
+    </script>
+    <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+    <script>
+        // --- 1. FIREBASE CONFIGURATION (REPLACE WITH YOURS) ---
+        const firebaseConfig = {
+    apiKey: "AIzaSyAIe5ABz--dXPd5Hg_EpKGsTFZUNESpqLQ",
+    authDomain: "junaed-somrat-official-website.firebaseapp.com",
+    projectId: "junaed-somrat-official-website",
+    storageBucket: "junaed-somrat-official-website.firebasestorage.app",
+    messagingSenderId: "381527347045",
+    appId: "1:381527347045:web:6638cde848440e69e19b8c",
+    measurementId: "G-GD82P7S91T"
+};
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
+
+        let blogsData =[];
+
+        // --- 2. FETCH DATA FROM FIREBASE ---
+        async function fetchSiteData() {
+            // General Info
+            const infoDoc = await db.collection("general").doc("info").get();
+            if (infoDoc.exists) {
+                const data = infoDoc.data();
+                document.getElementById('site-name').innerText = data.name || "Junaed Islam Somrat";
+                document.getElementById('nav-logo').innerText = data.name ? data.name.split(' ')[0] + "." : "Junaed.";
+                document.getElementById('site-subtitle').innerText = data.subtitle || "Graphics Designer & YouTube Content Creator";
+                document.getElementById('site-intro').innerText = data.intro || "Welcome to my website.";
+                document.getElementById('about-p1').innerHTML = data.about_p1 || "Hello! I am Junaed...";
+                document.getElementById('about-p2').innerText = data.about_p2 || "and I love creating things.";
+                document.getElementById('about-p3').innerText = data.about_p3 || "My journey started...";
+                document.getElementById('skill-1').innerText = data.skill_1 || "Design";
+                document.getElementById('skill-2').innerText = data.skill_2 || "Video Editing";
+                document.getElementById('skill-3').innerText = data.skill_3 || "YouTube";
+                
+                const img = data.profile_img || "https://ui-avatars.com/api/?name=Junaed&background=1E3A8A&color=fff";
+                document.getElementById('main-profile-img').src = img;
+                document.getElementById('nav-profile-img').src = img;
+                
+                const dob = new Date(data.dob || '2010-08-09');
+                document.getElementById('dynamic-age').innerText = Math.abs(new Date(Date.now() - dob.getTime()).getUTCFullYear() - 1970);
+            }
+
+            // Portfolio Fetch
+            const portSnap = await db.collection("portfolio").orderBy("timestamp", "desc").get();
+            const portContainer = document.getElementById('portfolio-container');
+            portContainer.innerHTML = '';
+            portSnap.forEach(doc => {
+                const p = doc.data();
+                portContainer.innerHTML += `
+                <div class="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-100 group reveal">
+                    <div class="h-56 bg-gray-200 relative overflow-hidden">
+                        <img src="${p.imgUrl}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-bold text-xl text-gray-800 mb-2">${p.title}</h3>
+                        <p class="text-gray-500">${p.desc}</p>
+                    </div>
+                </div>`;
+            });
+
+            // Blogs Fetch
+            const blogSnap = await db.collection("blogs").orderBy("timestamp", "desc").get();
+            const blogContainer = document.getElementById('blog-list-container');
+            blogContainer.innerHTML = '';
+            blogsData =[];
+            
+            blogSnap.forEach(doc => {
+                const b = doc.data();
+                b.id = doc.id;
+                blogsData.push(b);
+                blogContainer.innerHTML += `
+                <article class="bg-white p-8 rounded-3xl shadow-md hover:shadow-xl transition-all duration-300 border border-gray-100 reveal cursor-pointer group" onclick="openBlog('${b.id}')">
+                    <div class="flex items-center gap-3 mb-4 text-sm text-gray-500">
+                        <span class="bg-blue-50 text-secondary px-3 py-1 rounded-full font-medium">${b.tags}</span>
+                        <span>•</span>
+                        <span>${b.date}</span>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-800 mb-3 group-hover:text-primary transition-colors">${b.title}</h3>
+                    <p class="text-gray-600 leading-relaxed mb-6 line-clamp-2">${b.shortDesc}</p>
+                    <button class="text-secondary font-medium group-hover:text-primary transition-colors flex items-center gap-2">
+                        <span>Read More</span> 
+                        <svg class="h-4 w-4 transform group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
+                    </button>
+                </article>`;
+            });
+
+            initReveal();
+        }
+
+        function openBlog(id) {
+            const blog = blogsData.find(b => b.id === id);
+            if(blog) {
+                document.getElementById('sb-tag').innerText = blog.tags;
+                document.getElementById('sb-title').innerText = blog.title;
+                document.getElementById('sb-content').innerHTML = blog.content;
+                document.getElementById('sb-date').innerText = blog.date;
+                navigate('single-blog');
+            }
+        }
+
+        // --- 3. AUTO TRANSLATE LOGIC ---
+        function setLanguage(langCode) {
+            let select = document.querySelector('.goog-te-combo');
+            if (select) {
+                select.value = langCode;
+                select.dispatchEvent(new Event('change'));
+            }
+            if(langCode === 'ar') document.body.setAttribute('dir', 'rtl');
+            else document.body.setAttribute('dir', 'ltr');
+            
+            if(langCode === 'bn') document.body.classList.replace('font-sans', 'font-bengali');
+            else document.body.classList.replace('font-bengali', 'font-sans');
+        }
+
+        function autoDetectLanguage() {
+            const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
+            if (tz.includes('Dhaka')) return 'bn';
+            if (tz.includes('Kolkata') || tz.includes('Delhi')) return 'hi';
+            if (tz.includes('Riyadh') || tz.includes('Dubai')) return 'ar';
+            return 'en';
+        }
+
+        // --- 4. UTILS & NAVIGATION ---
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('active'); });
+        }, { threshold: 0.1 });
+
+        function initReveal() { document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el)); }
+
+        function navigate(pageId) {
+            document.querySelectorAll('.page-view').forEach(p => p.classList.remove('active'));
+            document.getElementById(pageId).classList.add('active');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            setTimeout(initReveal, 100);
+        }
+
+        function toggleMobileMenu() {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+            document.getElementById('mobile-lang-menu').classList.add('hidden');
+        }
+
+        function toggleMobileLang() {
+            document.getElementById('mobile-lang-menu').classList.toggle('hidden');
+            document.getElementById('mobile-menu').classList.add('hidden');
+        }
+
+        window.addEventListener('load', () => {
+            fetchSiteData();
+            setTimeout(() => setLanguage(autoDetectLanguage()), 1000); // Wait for translation widget
+            document.getElementById('current-year').innerText = new Date().getFullYear();
+        });
+    </script>
+</body>
+</html>
+
