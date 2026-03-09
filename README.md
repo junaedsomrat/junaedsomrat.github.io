@@ -5,4 +5,4 @@ Official website for Junaed Somrat
 
 ## Author
 
-- [@junaedislamsomrat](https://www.github.com/junaedsomra)
+- [@junaedislamsomrat](https://www.github.com/junaedsomrat)
