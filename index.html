@@ -16,7 +16,7 @@
     <meta name="geo.region" content="BD">
     <meta name="geo.placename" content="Bangladesh">
 
-    <!-- Open Graph / Facebook -->
+    <!-- Open Graph / Facebook (For social sharing) -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://junaedsomrat.github.io">
     <meta property="og:title" content="Junaed Islam Somrat | Content Creator">
@@ -30,7 +30,7 @@
     <meta property="twitter:description" content="Explore in details about Junaed Islam Somrat.">
     <meta property="twitter:image" content="https://junaedsomrat.github.io/profile.jpg">
 
-    <!-- JSON-LD Structured Data -->
+    <!-- JSON-LD Structured Data (Google Rich Snippets) -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -62,35 +62,17 @@
 
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@300;400;600;700&family=Noto+Serif+Bengali:wght@400;600;700&display=swap" rel="stylesheet">
     
-    <!-- Google Fonts: Noto Serif Bengali and Open Sans (as Google Sans fallback) -->
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Bengali:wght@400;600;700&family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
-    
-    <style>
-        /* Apply Google Sans if available, otherwise Open Sans */
-        @font-face {
-            font-family: 'Google Sans';
-            src: local('Google Sans Regular'), local('Google Sans'), local('Product Sans');
-        }
-
-        body {
-            font-family: 'Google Sans', 'Open Sans', sans-serif;
-        }
-
-        /* Specific rule for Bengali text */
-        [lang="bn"], .font-bengali {
-            font-family: 'Noto Serif Bengali', serif !important;
-        }
-    </style>
-
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: { primary: '#1E3A8A', secondary: '#3B82F6', accent: '#DBEAFE', bgLight: '#F8FAFC' },
                     fontFamily: { 
-                        sans: ['"Google Sans"', '"Open Sans"', 'sans-serif'], 
-                        bengali: ['"Noto Serif Bengali"', 'serif'] 
+                        sans: ['"Noto Sans"', '"Noto Serif Bengali"', 'sans-serif'], 
+                        bengali: ['"Noto Serif Bengali"', '"Noto Sans"', 'serif'] 
                     }
                 }
             }
@@ -99,7 +81,7 @@
 
 <script src="https://junaedsomrat.github.io/js/style.js"></script>
 </head>
-<body class="font-sans antialiased min-h-screen flex flex-col transition-colors duration-300 relative">
+<body class="font-bengali antialiased min-h-screen flex flex-col transition-colors duration-300 relative">
 
     <!-- Hidden Google Translate Element -->
     <div id="google_translate_element"></div>
@@ -126,7 +108,7 @@
 
                 <!-- Desktop Menu -->
                 <div class="hidden md:flex space-x-8 items-center" dir="ltr">
-                    <a href="#home" onclick="navigate('home')" class="hover:text-secondary font-medium transition-colors">Home</a>
+                    <a href="#home" onclick="navigate('home')" class="text-gray-600 hover:text-secondary font-medium transition-colors">Home</a>
                     <a href="#home" onclick="navigate('home'); setTimeout(()=>document.getElementById('about-section').scrollIntoView(), 100);" class="text-gray-600 hover:text-secondary font-medium transition-colors">About</a>
                     <a href="#portfolio" onclick="navigate('portfolio')" class="text-gray-600 hover:text-secondary font-medium transition-colors">Portfolio</a>
                     <a href="#blog" onclick="navigate('blog')" class="text-gray-600 hover:text-secondary font-medium transition-colors">Blog</a>
@@ -188,7 +170,7 @@
                     </div>
                 </div>
 
-                <h1 id="site-name" class="font-bengali text-4xl sm:text-5xl md:text-6xl font-bold text-primary mb-4">জুনায়েদ ইসলাম সম্রাট</h1>
+                <h1 id="site-name" class="text-4xl sm:text-5xl md:text-6xl font-bold text-primary mb-4">জুনায়েদ ইসলাম সম্রাট</h1>
                 <p id="site-subtitle" class="text-xl sm:text-2xl text-gray-600 mb-6 font-light">...</p>
                 <p id="site-intro" class="max-w-2xl mx-auto text-gray-500 mb-8 leading-relaxed text-lg">...</p>
 
@@ -210,7 +192,7 @@
                     <div class="w-16 h-1 bg-secondary mx-auto rounded-full"></div>
                 </div>
                 <div class="grid md:grid-cols-2 gap-12 items-center">
-                    <div class="font-bengali space-y-6 text-gray-600 text-lg leading-relaxed">
+                    <div class="space-y-6 text-gray-600 text-lg leading-relaxed">
                         <p id="about-p1">...</p>
                         <p>বর্তমানে আমার বয়স <strong class="text-secondary text-2xl"><span id="dynamic-age"></span></strong>বছর। <span id="about-p2"></span></p>
                         <p id="about-p3">...</p>
@@ -282,7 +264,7 @@
                     <h2 class="text-4xl font-bold text-primary mb-4">My Writings</h2>
                     <div class="w-16 h-1 bg-secondary mx-auto rounded-full mb-4"></div>
                 </div>
-                <div class="space-y-8 font-bengali" id="blog-list-container">
+                <div class="space-y-8" id="blog-list-container">
                     <!-- Fetching dynamically -->
                 </div>
             </div>
@@ -295,7 +277,7 @@
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" /></svg>
                     <span>Back</span>
                 </button>
-                <div class="mt-12 mb-8 font-bengali">
+                <div class="mt-12 mb-8">
                     <div class="flex items-center gap-3 mb-6 text-sm text-gray-500">
                         <span id="sb-tag" class="bg-blue-50 text-secondary px-4 py-1.5 rounded-full font-semibold tracking-wide"></span>
                         <span>•</span>
@@ -347,11 +329,11 @@
 
     <footer class="bg-white/50 backdrop-blur-sm border-t border-gray-100 py-4 mt-auto relative z-10">
         <div class="max-w-6xl mx-auto px-4 text-center text-gray-500 text-sm">
-            <p style="font-family: 'Google Sans', 'Open Sans', sans-serif;">&copy; <span id="current-year"></span> Junaed Islam Somrat. All rights reserved.</p>
+            <p style="font-family: poppins, sans-serif;">&copy; <span id="current-year"></span> Junaed Islam Somrat. All rights reserved.</p>
         </div>
     </footer>
 
-    <!-- Google Translate Script -->
+    <!-- Google Translate Script (Hidden UI but powers translations) -->
     <script type="text/javascript">
         function googleTranslateElementInit() {
             new google.translate.TranslateElement({pageLanguage: 'bn', autoDisplay: false}, 'google_translate_element');
@@ -361,3 +343,4 @@
 <script src="https://junaedsomrat.github.io/js/script.js"></script>
 </body>
 </html>
+
