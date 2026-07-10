@@ -1,1 +1,116 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page Not Found | Junaed Somrat</title>
+    
+    <!-- এসইও এবং ক্রলার নির্দেশনাবলী (৪০৪ পেইজ ইনডেক্স না করার জন্য) -->
+    <meta name="robots" content="noindex, follow">
+
+    <!-- ওয়েবসাইট ফেভিকন -->
+    <link rel="icon" type="image/png" href="https://junaedsomrat.github.io/assets/favicon.png">
+
+    <!-- গুগল ফন্ট (Inter) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- টেইলউইন্ড সিএসএস ইমপোর্ট -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #ffffff;
+            color: #000000;
+            -webkit-tap-highlight-color: transparent;
+        }
+        /* এন্ট্রি অ্যানিমেশন */
+        .fade-in-up {
+            animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body class="flex flex-col min-h-screen">
+
+    <!-- মূল কন্টেন্ট এরিয়া -->
+    <main class="flex-grow flex flex-col items-center justify-center px-6 py-16 text-center fade-in-up">
+        <!-- লোগো/আইকন এরিয়া -->
+        <div class="mb-8">
+            <a href="/">
+                <img src="https://junaedsomrat.github.io/assets/favicon.png" alt="Junaed Somrat" class="w-16 h-16 mx-auto hover:scale-105 transition-transform duration-300">
+            </a>
+        </div>
+
+        <!-- বড় করে ৪০৪ টেক্সট এবং মেসেজ -->
+        <h1 class="text-9xl font-black tracking-tight text-black mb-4">
+            404
+        </h1>
+        <h2 class="text-2xl font-bold text-gray-900 mb-3">
+            Page Not Found
+        </h2>
+        <p class="text-base text-gray-500 max-w-md mx-auto mb-10 leading-relaxed">
+            The page you are looking for might have been removed, had its name changed, or is temporarily unavailable.
+        </p>
+
+        <!-- হোম পেইজে ফিরে যাওয়ার বাটন -->
+        <div>
+            <a href="/" class="inline-flex items-center px-8 py-3.5 bg-black text-white font-semibold text-sm tracking-wide rounded-full hover:bg-neutral-800 transition-all duration-300 transform active:scale-95 shadow-lg">
+                Go Back Home
+            </a>
+        </div>
+    </main>
+
+    <!-- ফুটার সেকশন (মূল সাইটের সাথে মিল রেখে) -->
+    <footer class="bg-[#f0f0f0] border-t border-gray-200 py-12 px-6 w-full">
+        <div class="max-w-xl mx-auto flex flex-col items-start justify-center">
+            <!-- ফুটার ফেভিকন এবং লোগো -->
+            <div class="flex items-center space-x-3 mb-3">
+                <img src="https://junaedsomrat.github.io/assets/favicon_footer.png" alt="Footer Logo" class="w-8 h-8 object-contain" onerror="this.src='https://junaedsomrat.github.io/assets/favicon.png'">
+                <span class="text-xl font-bold tracking-tight text-black">Junaed Somrat</span>
+            </div>
+            
+            <!-- কপিরাইট টেক্সট (সাল অটোমেটিক জেনারেট হবে) -->
+            <p class="text-xs text-gray-500 font-medium">
+                &copy; <span id="current-year">2026</span>, Junaed Somrat all rights reserved
+            </p>
+        </div>
+    </footer>
+
+    <!-- স্ক্রিপ্ট দিয়ে কারেন্ট ইয়ার আপডেট করা -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const currentYear = new Date().getFullYear();
+            const yearElement = document.getElementById("current-year");
+            if (yearElement) {
+                yearElement.textContent = currentYear;
+            }
+        });
+    </script>
+</body>
+</html>
+
