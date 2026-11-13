@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="/favicon.png">
+<link rel="icon" type="image/png" href="/favicon.png">
+<title>Blog Generator - Junaed</title>
+<style>
+@font-face{font-family:'Kalpurush';src:url('/assets/Kalpurush.ttf') format('truetype');font-display:swap}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{overflow-x:hidden;max-width:100vw}
+body{background:#f6f3eb;color:#1a1a1a;font-family:'Kalpurush',sans-serif}
+button,input,textarea{font-family:'Kalpurush',sans-serif}
+#genNav{position:fixed;top:0;left:0;width:100%;height:56px;background:#fff;border-bottom:1px solid #e8e2d2;display:flex;align-items:center;justify-content:space-between;padding:0 18px;z-index:200}
+#genNav .tabs{display:flex;gap:10px}
+#genNav .tab{border:1px solid #e5ddd0;background:#fcfaf5;padding:8px 16px;cursor:pointer;font-size:14px}
+#genNav .tab.active{background:#111;color:#fff;border-color:#111}
+#genNav #exportBtn{background:#111;color:#fff;border:none;padding:10px 18px;cursor:pointer}
+#app{max-width:1000px;margin:0 auto;padding:80px 18px 30px 18px}
+.panel{display:none}
+.panel.active{display:block}
+.card{background:#fff;border:1px solid #ece7d9;padding:18px;margin-bottom:14px}
+.card h3{font-size:13px;letter-spacing:1px;color:#999;margin-bottom:12px;text-transform:uppercase}
+.input, .textarea{width:100%;border:1px solid #e5ddd0;background:#fcfaf5;padding:12px 12px;outline:none;font-size:16px;margin-bottom:10px}
+.textarea{min-height:80px;resize:vertical}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media(max-width:700px){.row2{grid-template-columns:1fr}}
+.thumbPreview{width:100%;height:180px;background:#000;object-fit:cover;display:none;margin-top:8px}
+#editor{background:#fff;border:1px solid #ece7d9;min-height:300px;padding:14px}
+.block{margin:0}
+.text-block{width:100%;min-height:36px;outline:none;font-size:20px;line-height:1.9;padding:12px 8px;border-left:3px solid transparent;white-space:pre-wrap;overflow-wrap:break-word}
+.text-block:focus{border-left-color:#111;background:#fcfaf5}
+.text-block:empty:before{content:attr(data-placeholder);color:#bbb}
+.quote-block{border-left:3px solid #111;padding:14px 16px;background:#fcfaf7;font-size:20px;font-style:italic;margin:8px 0}
+.html-block{border:1px dashed #c9c1ad;background:#fcfaf5;padding:10px;font-size:13px;overflow:hidden}
+.html-block .label{font-size:11px;color:#999;margin-bottom:6px}
+.img-block{border:1px solid #eee9dd;background:#f5f2eb;padding:12px;display:flex;gap:12px;align-items:center}
+.img-block img{width:90px;height:64px;object-fit:cover;background:#000}
+.img-block .inputs{flex:1;display:flex;flex-direction:column;gap:8px}
+.img-block input{width:100%;border:1px solid #e5ddd0;background:#fff;padding:9px 10px;font-size:14px;outline:none}
+.img-block .remove{background:#fff;border:1px solid #e5ddd0;width:28px;height:28px;cursor:pointer}
+.plus-row{display:flex;align-items:center;justify-content:center;height:44px;gap:8px;opacity:0;transition:0.2s}
+#editor:hover .plus-row{opacity:1}
+.plus-row-line{flex:1;height:1px;background:#eee9dd}
+.icon-btn{min-width:52px;height:32px;padding:0 8px;border:1px solid #ccc;background:#fff;color:#111;cursor:pointer;font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center}
+.icon-btn:hover{background:#111;color:#fff}
+#modal{position:fixed;inset:0;background:rgba(0,0,0,0.45);display:none;align-items:center;justify-content:center;z-index:999;padding:20px}
+#modal.show{display:flex}
+#modalBox{background:#fff;width:100%;max-width:480px;padding:18px;border:1px solid #ece7d9}
+#modalBox input, #modalBox textarea{width:100%;border:1px solid #e5ddd0;background:#fcfaf5;padding:12px;font-size:15px;outline:none;margin-bottom:10px}
+#modalBox textarea{min-height:120px}
+#modalBox .row{display:flex;gap:10px}
+#modalBox button{flex:1;padding:11px;border:none;cursor:pointer}
+#modalBox .cancel{background:#f5f2eb}
+#modalBox .ok{background:#111;color:#fff}
+#previewArea{background:#fff;min-height:90vh;border:1px solid #ece7d9}
+</style>
+</head>
+<body>
+<div id="genNav">
+<div class="tabs">
+<button class="tab active" data-tab="edit">Edit</button>
+<button class="tab" data-tab="preview">Preview</button>
+</div>
+<button id="exportBtn">Export Blog</button>
+</div>
+
+<div id="app">
+<div id="editPanel" class="panel active">
+<div class="card">
+<h3>Title & Alias</h3>
+<input id="titleInput" class="input" placeholder="ব্লগ টাইটেল লিখো...">
+<input id="aliasInput" class="input" placeholder="alias - space দিলে _ হবে">
+</div>
+<div class="card">
+<h3>Meta Info</h3>
+<div class="row2">
+<input id="authorInput" class="input" value="জুনায়েদ ইসলাম সম্রাট">
+<input id="dateTimeInput" class="input" type="datetime-local">
+</div>
+</div>
+<div class="card">
+<h3>SEO</h3>
+<input id="keywordsInput" class="input" placeholder="keywords, কমা দিয়ে">
+<textarea id="descInput" class="textarea" placeholder="SEO Description - 150 অক্ষর"></textarea>
+</div>
+<div class="card">
+<h3>Thumbnail</h3>
+<input id="thumbInput" class="input" placeholder="https://... না দিলে /assets/auto-thumbnail.jpg">
+<input id="thumbSourceInput" class="input" placeholder="ছবি সোর্স">
+<img id="thumbPreview" class="thumbPreview">
+</div>
+<div class="card">
+<h3>Main Blog - Enter বন্ধ, BR দিয়ে নতুন প্যারা</h3>
+<div id="editor"></div>
+</div>
+</div>
+
+<div id="previewPanel" class="panel">
+<div id="previewArea"></div>
+</div>
+</div>
+
+<div id="modal">
+<div id="modalBox">
+<h3 id="modalTitle">ছবি যোগ করো</h3>
+<input id="linkInput" placeholder="ছবির লিংক https://...">
+<input id="sourceInput" placeholder="ছবি: ">
+<textarea id="htmlInput" style="display:none" placeholder="<div>HTML কোড...</div>"></textarea>
+<div class="row"><button class="cancel" id="cancelBtn">বাতিল</button><button class="ok" id="addBtn">যোগ করো</button></div>
+</div>
+</div>
+
+<script>
+const editor=document.getElementById('editor');
+const titleInput=document.getElementById('titleInput');
+const aliasInput=document.getElementById('aliasInput');
+const authorInput=document.getElementById('authorInput');
+const dateTimeInput=document.getElementById('dateTimeInput');
+const keywordsInput=document.getElementById('keywordsInput');
+const descInput=document.getElementById('descInput');
+const thumbInput=document.getElementById('thumbInput');
+const thumbSourceInput=document.getElementById('thumbSourceInput');
+const thumbPreview=document.getElementById('thumbPreview');
+const modal=document.getElementById('modal');
+const linkInput=document.getElementById('linkInput');
+const sourceInput=document.getElementById('sourceInput');
+const htmlInput=document.getElementById('htmlInput');
+const modalTitle=document.getElementById('modalTitle');
+
+let blocks=[{type:'p',text:''}];
+let pendingIndex=null;
+let modalMode='photo';
+
+function initDate(){
+ const now=new Date();
+ const local= new Date(now.getTime() - now.getTimezoneOffset()*60000).toISOString().slice(0,16);
+ dateTimeInput.value=local;
+}
+initDate();
+titleInput.addEventListener('input',()=>{
+  if(!aliasInput.dataset.manual){
+    aliasInput.value=titleInput.value.trim().replace(/\s+/g,'_').replace(/[^\w\u0980-\u09FF_]+/g,'');
+  }
+});
+aliasInput.addEventListener('input',()=>aliasInput.dataset.manual='1');
+thumbInput.addEventListener('input',()=>{
+  const v=thumbInput.value.trim();
+  if(v){ thumbPreview.src=v; thumbPreview.style.display='block'; }
+  else{ thumbPreview.style.display='none'; }
+});
+thumbPreview.onerror=()=>thumbPreview.style.display='none';
+
+function render(){
+ editor.innerHTML='';
+ blocks.forEach((block, idx)=>{
+   if(idx>0){
+     const pr=document.createElement('div'); pr.className='plus-row';
+     pr.innerHTML=`<div class="plus-row-line"></div>
+     <button class="icon-btn" data-t="photo">Photo</button>
+     <button class="icon-btn" data-t="br">BR</button>
+     <button class="icon-btn" data-t="quote">Quote</button>
+     <button class="icon-btn" data-t="html">HTML</button>
+     <div class="plus-row-line"></div>`;
+     pr.querySelector('[data-t="photo"]').onclick=()=>openModal('photo', idx);
+     pr.querySelector('[data-t="br"]').onclick=()=>{ blocks.splice(idx,0,{type:'p',text:''}); render(); };
+     pr.querySelector('[data-t="quote"]').onclick=()=>{ blocks.splice(idx,0,{type:'quote',text:'উক্তি লিখো...'}); render(); };
+     pr.querySelector('[data-t="html"]').onclick=()=>openModal('html', idx);
+     editor.appendChild(pr);
+   }
+   if(block.type==='p'){
+     const d=document.createElement('div'); d.className='block';
+     const t=document.createElement('div'); t.className='text-block'; t.contentEditable=true; t.setAttribute('data-placeholder','প্যারাগ্রাফ লিখো... Enter বন্ধ');
+     t.innerText=block.text;
+     t.oninput=()=>{ blocks[idx].text=t.innerText; };
+     t.onkeydown=(e)=>{ if(e.key==='Enter'){ e.preventDefault(); } };
+     d.appendChild(t); editor.appendChild(d);
+   } else if(block.type==='quote'){
+     const d=document.createElement('div'); d.className='block';
+     const q=document.createElement('div'); q.className='quote-block'; q.contentEditable=true; q.innerText=block.text;
+     q.oninput=()=>{ blocks[idx].text=q.innerText; };
+     q.onkeydown=(e)=>{ if(e.key==='Enter'){ e.preventDefault(); } };
+     const del=document.createElement('button'); del.textContent='✕'; del.style.cssText='float:right;border:1px solid #ddd;background:#fff;width:24px;height:24px;cursor:pointer';
+     del.onclick=()=>{ blocks.splice(idx,1); if(blocks.length===0) blocks=[{type:'p',text:''}]; render(); };
+     d.appendChild(del); d.appendChild(q); editor.appendChild(d);
+   } else if(block.type==='photo'){
+     const d=document.createElement('div'); d.className='block img-block';
+     d.innerHTML=`<img src="${block.src}"><div class="inputs"><input class="linkEdit" value="${block.src}"><input class="srcEdit" value="${block.credit}"></div><button class="remove">✕</button>`;
+     d.querySelector('.linkEdit').oninput=e=>{ blocks[idx].src=e.target.value; };
+     d.querySelector('.srcEdit').oninput=e=>{ blocks[idx].credit=e.target.value; };
+     d.querySelector('.remove').onclick=()=>{ blocks.splice(idx,1); if(blocks.length===0) blocks=[{type:'p',text:''}]; render(); };
+     editor.appendChild(d);
+   } else if(block.type==='html'){
+     const d=document.createElement('div'); d.className='block html-block';
+     d.innerHTML=`<div class="label">HTML BLOCK</div><div style="white-space:pre-wrap;word-break:break-all">${(block.code||'').replace(/</g,'&lt;')}</div><button class="remove" style="margin-top:6px">✕</button>`;
+     d.onclick=(e)=>{ if(e.target.classList.contains('remove')) return; openModal('html', idx, block.code); };
+     d.querySelector('.remove').onclick=()=>{ blocks.splice(idx,1); if(blocks.length===0) blocks=[{type:'p',text:''}]; render(); };
+     editor.appendChild(d);
+   }
+ });
+ const last=document.createElement('div'); last.className='plus-row';
+ last.innerHTML=`<div class="plus-row-line"></div>
+ <button class="icon-btn" data-t="photo">Photo</button>
+ <button class="icon-btn" data-t="br">BR</button>
+ <button class="icon-btn" data-t="quote">Quote</button>
+ <button class="icon-btn" data-t="html">HTML</button>
+ <div class="plus-row-line"></div>`;
+ last.querySelector('[data-t="photo"]').onclick=()=>openModal('photo', blocks.length);
+ last.querySelector('[data-t="br"]').onclick=()=>{ blocks.push({type:'p',text:''}); render(); };
+ last.querySelector('[data-t="quote"]').onclick=()=>{ blocks.push({type:'quote',text:'উক্তি লিখো...'}); render(); };
+ last.querySelector('[data-t="html"]').onclick=()=>openModal('html', blocks.length);
+ editor.appendChild(last);
+}
+
+function openModal(mode, idx, existing){
+ modalMode=mode; pendingIndex=idx;
+ linkInput.style.display= mode==='photo' ? 'block':'none';
+ sourceInput.style.display= mode==='photo' ? 'block':'none';
+ htmlInput.style.display= mode==='html' ? 'block':'none';
+ if(mode==='photo'){ modalTitle.textContent='ছবি যোগ করো'; linkInput.value=''; sourceInput.value='ছবি: '; }
+ else{ modalTitle.textContent='HTML কোড যোগ করো'; htmlInput.value=existing||''; }
+ modal.classList.add('show');
+}
+function closeModal(){ modal.classList.remove('show'); }
+document.getElementById('cancelBtn').onclick=closeModal;
+modal.onclick=e=>{ if(e.target===modal) closeModal(); };
+document.getElementById('addBtn').onclick=()=>{
+ if(modalMode==='photo'){
+   const link=linkInput.value.trim(); let src=sourceInput.value.trim();
+   if(!link) return; if(!src.startsWith('ছবি:')) src='ছবি: '+src;
+   blocks.splice(pendingIndex,0,{type:'photo', src:link, credit:src});
+ } else {
+   const code=htmlInput.value.trim(); if(!code) return;
+   if(pendingIndex < blocks.length && blocks[pendingIndex] && blocks[pendingIndex].type==='html'){
+     blocks[pendingIndex].code=code;
+   } else {
+     blocks.splice(pendingIndex,0,{type:'html', code:code});
+   }
+ }
+ closeModal(); render();
+};
+
+function buildArticleHTML(){
+ let html='';
+ blocks.forEach(b=>{
+   if(b.type==='p' && b.text.trim()){
+     const lines=b.text.split('\n').map(l=>l.replace(/</g,'&lt;').trim()).filter(l=>l!=='');
+     if(lines.length) html+=`<p>${lines.join('<br>')}</p>\n`;
+   } else if(b.type==='quote' && b.text.trim()){
+     html+=`<blockquote>${b.text.replace(/</g,'&lt;')}</blockquote>\n`;
+   } else if(b.type==='photo'){
+     html+=`<img src="${b.src}" data-credit="${(b.credit||'').replace(/"/g,'&quot;')}">\n`;
+   } else if(b.type==='html'){
+     html+=`${b.code}\n`;
+   }
+ });
+ return html;
+}
+
+function getFinalHTML(){
+ const title=titleInput.value.trim()||'Untitled';
+ const aliasRaw=aliasInput.value.trim()||'post';
+ const alias=aliasRaw.replace(/\s+/g,'_');
+ const author=authorInput.value.trim()||'জুনায়েদ ইসলাম সম্রাট';
+ const dtVal=dateTimeInput.value ? new Date(dateTimeInput.value) : new Date();
+ const dateStr=dtVal.toLocaleDateString('bn-BD',{day:'numeric',month:'long',year:'numeric'});
+ const timeStr=dtVal.toLocaleTimeString('en-BD',{hour:'2-digit',minute:'2-digit'});
+ const fullDateTime=`${dateStr} | ${timeStr}`;
+ const keywords=keywordsInput.value.trim();
+ const description=descInput.value.trim()|| title.slice(0,150);
+ let thumb=thumbInput.value.trim()||'/assets/auto-thumbnail.jpg';
+ const thumbCredit=thumbSourceInput.value.trim()||'';
+ const articleInner=buildArticleHTML();
+
+ return `<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" href="/favicon.png">
+<link rel="icon" type="image/png" href="/favicon.png">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>${title.replace(/</g,'&lt;')}</title>
+<meta name="description" content="${description.replace(/"/g,'&quot;')}">
+<meta name="keywords" content="${keywords.replace(/"/g,'&quot;')}">
+<meta name="author" content="${author.replace(/"/g,'&quot;')}">
+<meta property="og:title" content="${title.replace(/"/g,'&quot;')}">
+<meta property="og:description" content="${description.replace(/"/g,'&quot;')}">
+<meta property="og:image" content="${thumb}">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Junaed Somrat">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="${title.replace(/"/g,'&quot;')}">
+<meta name="twitter:description" content="${description.replace(/"/g,'&quot;')}">
+<meta name="twitter:image" content="${thumb}">
+<link rel="icon" href="/assets/nav.png">
+<style>
+@font-face{font-family:'Kalpurush';src:url('/assets/Kalpurush.ttf') format('truetype');font-display:swap}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{overflow-x:hidden;max-width:100vw}
+body{background:#fff;color:#1a1a1a;font-family:'Kalpurush',sans-serif;padding-top:72px}
+#navbar{width:100%;height:72px;background:#fff;border-bottom:1px solid #ece9e0;display:flex;align-items:center;padding:0 20px;position:fixed;top:0;left:0;z-index:100}
+#navbar img{height:50px}
+#progress{position:absolute;left:0;bottom:-1px;height:2px;background:#111;width:0%;z-index:101}
+#wrapper{width:100%;max-width:760px;margin:0 auto;padding:28px 15px 80px 15px;overflow:hidden}
+@media(max-width:768px){ #wrapper{ padding-left:45px; padding-right:45px; } }
+@media(min-width:1100px){#wrapper{max-width:700px;padding:50px 0 100px 0}}
+h1{font-size:42px;line-height:1.25;padding-bottom:18px;margin-bottom:18px;position:relative;font-weight:700;overflow-wrap:break-word}
+h1::after{content:'';position:absolute;bottom:0;left:0;width:48px;height:3px;background:#111}
+.meta{display:flex;gap:10px;font-size:15px;color:#8a877f;margin-bottom:18px;flex-wrap:wrap;align-items:center;background:#fff;border:1px solid #f0ece0;padding:8px 12px;width:fit-content;max-width:100%}
+.meta span{display:flex;align-items:center;gap:6px}
+.meta img{width:16px;height:16px;object-fit:contain}
+.meta #printBtn{background:none;border:none;font-family:'Kalpurush';font-size:15px;color:#111;font-weight:700;cursor:pointer;display:flex;align-items:center;gap:6px}
+.meta #printBtn img{width:16px;height:16px}
+.row-line{height:1px;background:#e5e2d9;margin-bottom:28px;position:relative;overflow:hidden}
+.row-line::after{content:'';position:absolute;left:0;top:0;height:100%;width:0%;background:#111;animation:grow 1.2s ease forwards}
+@keyframes grow{from{width:0%}to{width:100%}}
+.thumb-wrap{width:100%;margin:0 0 32px 0;position:relative;overflow:hidden;background:#000;line-height:0}
+.thumb-wrap img{width:100%;display:block}
+.thumb-credit{position:absolute;left:0;right:0;bottom:0;background:linear-gradient(to top, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.45) 40%, rgba(0,0,0,0) 100%);color:#fff;font-size:13px;text-align:center;padding:22px 12px 12px 12px}
+article{font-size:27px;line-height:1.9;color:#222;overflow-wrap:break-word;word-break:break-word;max-width:100%}
+article p{margin-bottom:28px;text-align:justify;text-justify:inter-word}
+article blockquote{border-left:3px solid #111;margin:16px 0 28px 0;padding:12px 16px;background:#fcfaf7;font-style:italic;text-align:left}
+article .pa-img-wrap{width:100%;margin:16px 0 32px 0;position:relative;overflow:hidden;background:#000;line-height:0;max-width:100%}
+article .pa-img-wrap img{width:100%;display:block;max-width:100%}
+article .pa-img-credit{position:absolute;left:0;right:0;bottom:0;background:linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.45) 45%, rgba(0,0,0,0) 100%);color:#fff;font-size:13px;text-align:center;padding:18px 12px 12px 12px}
+
+/* NEW FOOTER */
+#footer{width:100%;background:#f5f2eb;border-top:1px solid #ece9e0;padding:0}
+.footer-inner{max-width:760px;margin:0 auto;padding:36px 15px 28px 15px;display:flex;flex-direction:column;gap:22px}
+@media(max-width:768px){ .footer-inner{ padding-left:45px; padding-right:45px; } }
+@media(min-width:1100px){.footer-inner{max-width:700px;padding:40px 0 30px 0}}
+.footer-about{font-size:17px;line-height:1.8;color:#444}
+.footer-about b{color:#111}
+.footer-social{display:flex;gap:14px;align-items:center}
+.footer-social a{width:38px;height:38px;background:#fff;border:1px solid #e8e2d2;display:flex;align-items:center;justify-content:center;border-radius:50%}
+.footer-social a img{width:38px;height:38px;object-fit:contain}
+.footer-links{display:flex;gap:18px;flex-wrap:wrap;font-size:14px;color:#777}
+.footer-links a{color:#666;text-decoration:none}
+.footer-links a:hover{color:#111}
+.footer-bottom{border-top:1px solid #ece9e0;padding-top:18px;display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center}
+.footer-bottom .copy{font-size:13px;color:#888}
+.footer-bottom .powered{font-size:10px;letter-spacing:2px;color:#aaa;text-transform:uppercase}
+.footer-bottom .footer-logo{height:28px}
+@media print{
+#navbar,#progress{display:none !important}
+body{padding-top:0 !important}
+#wrapper{padding:0 12px !important;max-width:100% !important}
+.meta{border:none !important;padding:0 !important}
+#printBtn{display:none !important}
+#footer .footer-social, #footer .footer-links{display:none !important}
+}
+</style>
+</head>
+<body>
+<nav id="navbar"><img src="/assets/nav.png" alt=""><div id="progress"></div></nav>
+<div id="wrapper">
+<h1>${title.replace(/</g,'&lt;')}</h1>
+<div class="meta">
+<span><img src="/assets/author.png" alt="">${author}</span><span>|</span>
+<span><img src="/assets/dateandtime.png" alt="">${fullDateTime}</span><span>|</span>
+<span><button id="printBtn"><img src="/assets/print.png" alt="">PRINT</button></span>
+</div>
+<div class="row-line"></div>
+${thumb ? `<div class="thumb-wrap"><img src="${thumb}" alt="${title.replace(/"/g,'&quot;')}">${thumbCredit ? `<div class="thumb-credit">${thumbCredit.replace(/</g,'&lt;')}</div>` : ''}</div>` : ''}
+<article id="postContent">
+${articleInner}
+</article>
+</div>
+
+<footer id="footer">
+<div class="footer-inner">
+<div class="footer-about"><b>রহস্যপাতা</b> — বাংলার অজানা, অদ্ভুত আর বিস্ময়কর গল্পের আর্কাইভ। লিখছেন <b>জুনায়েদ ইসলাম সম্রাট</b>। প্রতিদিন নতুন রহস্য, ইতিহাস ও বিজ্ঞানের গল্প পড়তে আমাদের সাথে থাকুন।</div>
+<div class="footer-social">
+<a href="https://m.facebook.com/JunaedIslamSomrat" target="_blank"><img src="/assets/fb.png" alt="Facebook"></a>
+<a href="https://m.youtube.com/@JunaedSomrat" target="_blank"><img src="/assets/yt.png" alt="YouTube"></a>
+<a href="https://m.instagram.com/@junaed_somrat" target="_blank"><img src="/assets/insta.png" alt="Instagram"></a>
+</div>
+<div class="footer-links">
+<a href="/">Home</a>
+<a href="/about/">About</a>
+<a href="/contact/">Contact</a>
+<a href="/privacy/">Privacy Policy</a>
+<a href="/sitemap.xml">Sitemap</a>
+</div>
+<div class="footer-bottom">
+<hr>
+<div class="copy">© <span id="year"></span> Junaed Islam Somrat. All Rights Reserved.</div>
+<div class="powered">Powered by</div>
+<img class="footer-logo" src="/assets/footer.png" alt="">
+</div>
+</div>
+</footer>
+
+<script>
+document.addEventListener('DOMContentLoaded', function(){
+ const bar=document.getElementById('progress');
+ const upd=()=>{ const h=document.documentElement; bar.style.width=(h.scrollTop/(h.scrollHeight-h.clientHeight))*100+'%'; };
+ window.addEventListener('scroll', upd, {passive:true}); upd();
+ document.getElementById('printBtn').onclick=function(){ window.print(); };
+ document.querySelectorAll('#postContent img').forEach(img=>{
+   if(img.parentElement.classList.contains('pa-img-wrap')) return;
+   if(img.closest('.thumb-wrap')) return;
+   const credit=img.getAttribute('data-credit')||''; const wrap=document.createElement('div'); wrap.className='pa-img-wrap';
+   img.parentNode.insertBefore(wrap, img); wrap.appendChild(img);
+   if(credit){ const c=document.createElement('div'); c.className='pa-img-credit'; c.textContent=credit; wrap.appendChild(c); }
+ });
+});
+
+document.getElementById('year').textContent = new Date().getFullYear();
+<\/script>
+</body>
+</html>`;
+}
+
+function updatePreview(){
+ const previewArea=document.getElementById('previewArea');
+ const html=getFinalHTML();
+ previewArea.innerHTML='';
+ const iframe=document.createElement('iframe');
+ iframe.style.width='100%'; iframe.style.height='90vh'; iframe.style.border='none';
+ previewArea.appendChild(iframe);
+ const doc=iframe.contentDocument || iframe.contentWindow.document;
+ doc.open(); doc.write(html); doc.close();
+}
+
+document.querySelectorAll('.tab').forEach(t=>{
+ t.onclick=()=>{
+   document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));
+   t.classList.add('active');
+   document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+   if(t.dataset.tab==='edit'){ document.getElementById('editPanel').classList.add('active'); }
+   else{ document.getElementById('previewPanel').classList.add('active'); updatePreview(); }
+ };
+});
+
+document.getElementById('exportBtn').onclick=()=>{
+ const aliasRaw=aliasInput.value.trim()|| titleInput.value.trim()||'post';
+ const alias=aliasRaw.replace(/\s+/g,'_').replace(/[\\/:*?"<>|]+/g,'');
+ const finalHTML=getFinalHTML();
+ const blob=new Blob([finalHTML],{type:'text/html'});
+ const a=document.createElement('a'); a.download=alias+'.html'; a.href=URL.createObjectURL(blob); a.click();
+};
+
+render();
+</script>
+</body>
+</html>
