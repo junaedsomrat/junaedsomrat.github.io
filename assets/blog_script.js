@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', function(){
    if(credit){ const c=document.createElement('div'); c.className='pa-img-credit'; c.textContent=credit; wrap.appendChild(c); }
  });
 });
-fetch('data.json')
+fetch('https://junaedsomrat.github.io/assets/footer-about.json')
     .then(response => response.json())
     .then(data => {
       document.querySelector('.footer-about').textContent = data.footerAbout;
