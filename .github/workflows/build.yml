@@ -78,3 +78,19 @@ jobs:
           git add assets/master-links.json assets/feed.json sitemap.xml || true
           git diff --staged --quiet || git commit -m "auto: build feed + sitemap [skip ci]"
           git push || echo "No push needed"
+
+          - name: Update llms.txt
+        run: |
+          LIST=""
+          for file in blog/*.html; do
+            [ -e "$file" ] || continue
+            base=$(basename "$file" .html)
+            title=$(echo "$base" | sed 's/_/ /g')
+            LIST="${LIST}- [${title}](https://junaedsomrat.github.io/blog/${base}.html): https://junaedsomrat.github.io/blog/${base}.html\n"
+          done
+          # Replace auto section
+          awk -v list="$LIST" '
+            /<!-- AUTO_BLOG_LIST -->/ {print; print list; f=1; next}
+            f && /<!--.*-->/ {f=0}
+            !f
+          ' llms.txt > llms.tmp && mv llms.tmp llms.txt
