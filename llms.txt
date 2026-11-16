@@ -1,0 +1,13 @@
+# Junaed Somrat
+
+> A personal blog about self-growth, discipline and starting over. Written by Junaed Somrat.
+
+## Blog Posts
+<!-- AUTO_BLOG_LIST -->
+<!-- This section is auto-generated, don't edit manually -->
+
+## About
+- Author: Junaed Somrat
+- Site: https://junaedsomrat.github.io
+- Sitemap: https://junaedsomrat.github.io/sitemap.xml
+- Feed: https://junaedsomrat.github.io/assets/feed.json
