@@ -3,10 +3,8 @@ on:
   push:
     branches: [ main ]
   workflow_dispatch:
-
 permissions:
   contents: write
-
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -14,7 +12,6 @@ jobs:
       - uses: actions/checkout@v3
         with:
           fetch-depth: 0
-          
       - name: Build feed from /blog/*.html
         run: |
           node << 'NODE'
@@ -30,23 +27,19 @@ jobs:
               f.toLowerCase() !== 'index.html' && 
               f.toLowerCase() !== 'gen.html'
             );
-
             console.log('Found files:', files);
 
             const blogs = files.map(file => {
               try {
                 const html = fs.readFileSync(path.join(blogDir, file), 'utf8');
-                const get = (re) => {
-                  const m = html.match(re);
-                  return m ? m[1].trim() : '';
-                };
+                const get = (re) => { const m = html.match(re); return m ? m[1].trim() : ''; };
                 return {
                   title: get(/<meta property="og:title" content="([^"]+)"/) || get(/<title>([^<]+)<\/title>/) || file.replace('.html',''),
                   link: '/blog/' + file,
                   thumb: get(/<meta property="og:image" content="([^"]+)"/) || 'https://junaedsomrat.github.io/assets/auto-thumbnail.jpg',
                   description: get(/<meta name="description" content="([^"]+)"/),
                   genre: get(/<meta name="genre" content="([^"]+)"/) || 'blog',
-                  date: get(/<meta name="published-date" content="([^"]+)"/) || '1970-01-01',
+                  date: get(/<meta name="published-date" content="([^"]+)"/) || new Date().toISOString().split('T')[0],
                   datetime: get(/<meta name="published-datetime" content="([^"]+)"/) || ''
                 };
               } catch(e){ console.log('Error parsing', file, e.message); return null; }
@@ -56,9 +49,22 @@ jobs:
             
             fs.writeFileSync('assets/master-links.json', JSON.stringify(blogs, null, 2));
             fs.writeFileSync('assets/feed.json', JSON.stringify(blogs.slice(0, 50), null, 2));
-            console.log('SUCCESS: Built ' + blogs.length + ' blogs');
+
+            // --- SITEMAP AUTO BUILD ---
+            const today = new Date().toISOString(); // 2026-11-16T...
+            let sitemap = `<?xml version="1.0" encoding="UTF-8"?>\n`;
+            sitemap += `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n`;
+            sitemap += `  <url><loc>https://junaedsomrat.github.io/</loc><lastmod>${today}</lastmod></url>\n`;
+            sitemap += `  <url><loc>https://junaedsomrat.github.io/blog/</loc><lastmod>${today}</lastmod></url>\n`;
+            blogs.forEach(b => {
+              sitemap += `  <url><loc>https://junaedsomrat.github.io${b.link}</loc><lastmod>${new Date(b.date).toISOString()}</lastmod></url>\n`;
+            });
+            sitemap += `</urlset>`;
+            fs.writeFileSync('sitemap.xml', sitemap);
+            
+            console.log('SUCCESS: Built ' + blogs.length + ' blogs + sitemap.xml');
           } catch(err){
-            console.log('Build error but creating empty files:', err.message);
+            console.log('Build error:', err.message);
             if (!fs.existsSync('assets')) fs.mkdirSync('assets', {recursive:true});
             if (!fs.existsSync('assets/master-links.json')) fs.writeFileSync('assets/master-links.json','[]');
             if (!fs.existsSync('assets/feed.json')) fs.writeFileSync('assets/feed.json','[]');
@@ -69,6 +75,6 @@ jobs:
         run: |
           git config user.name "github-actions"
           git config user.email "actions@github.com"
-          git add assets/master-links.json assets/feed.json || true
-          git diff --staged --quiet || git commit -m "auto: build feed [skip ci]"
+          git add assets/master-links.json assets/feed.json sitemap.xml || true
+          git diff --staged --quiet || git commit -m "auto: build feed + sitemap [skip ci]"
           git push || echo "No push needed"
