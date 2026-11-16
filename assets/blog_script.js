@@ -25,23 +25,38 @@ document.addEventListener('DOMContentLoaded', function(){
       c.textContent = credit; 
       wrap.appendChild(c); 
     } 
-  });
+  }); 
 
   // footer about
-  fetch('https://junaedsomrat.github.io/assets/footer-about.json')
-    .then(response => response.json())
-    .then(data => {
-      const el = document.querySelector('.footer-about');
-      if(el && data.footerAbout) el.textContent = data.footerAbout;
-    })
+  fetch('https://junaedsomrat.github.io/assets/footer-about.json') 
+    .then(response => response.json()) 
+    .then(data => { 
+      const el = document.querySelector('.footer-about'); 
+      if(el && data.footerAbout) el.textContent = data.footerAbout; 
+    }) 
     .catch(()=>{});
 
-  // NOTICE LOGIC - OVER NAV + LINE
+  // footer links - NEW ADDED
+  fetch('https://junaedsomrat.github.io/assets/footer-links.json', { cache: 'no-store' })
+    .then(r => r.json())
+    .then(data => {
+      const container = document.querySelector('.footer-links');
+      if(!container || !data.links) return;
+      container.innerHTML = '';
+      data.links.forEach(item => {
+        if(!item.label || !item.href) return;
+        const a = document.createElement('a');
+        a.href = item.href;
+        a.textContent = item.label;
+        container.appendChild(a);
+      });
+    }).catch(()=>{});
+
+  // NOTICE LOGIC - OVER NAV + LINE 
   const noticeBar = document.getElementById('noticeBar'); 
   const noticeText = document.getElementById('noticeText'); 
   const noticeLine = document.getElementById('noticeLine'); 
-
-  if(noticeBar && noticeText && noticeLine){
+  if(noticeBar && noticeText && noticeLine){ 
     fetch('https://junaedsomrat.github.io/assets/notice.json', { cache: 'no-store' }) 
       .then(r => r.json()) 
       .then(data => { 
@@ -60,8 +75,8 @@ document.addEventListener('DOMContentLoaded', function(){
           }, 400); 
         }, 5000); 
       }) 
-      .catch(()=>{});
-  }
+      .catch(()=>{}); 
+  } 
 
-  document.getElementById('year').textContent = new Date().getFullYear();
+  document.getElementById('year').textContent = new Date().getFullYear(); 
 });
