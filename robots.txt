@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://junaedsomrat.github.io/sitemap.xml
