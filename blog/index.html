@@ -1,1 +1,96 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blogs - Junaed Islam Somrat</title>
+<meta name="description" content="জুনায়েদ ইসলাম সম্রাট এর সব ব্লগ - লেবেল অনুযায়ী গোছানো, লেটেস্ট ব্লগ আগে।">
+<meta name="author" content="Junaed Islam Somrat">
+<meta name="keywords" content="Junaed Somrat, Blogs, Bangla Blog">
+<meta property="og:title" content="Blogs - Junaed Somrat">
+<meta property="og:description" content="সব ব্লগ লেবেল অনুযায়ী গোছানো - লেটেস্ট আগে">
+<meta property="og:image" content="https://junaedsomrat.github.io/assets/nav.png">
+<meta property="og:type" content="website">
+<link rel="icon" href="https://junaedsomrat.github.io/favicon.png">
+<style>
+@font-face{font-family:'Kalpurush';src:url('https://raw.githubusercontent.com/junaedsomrat/junaedsomrat.github.io/refs/heads/main/assets/kalpurush.ttf') format('truetype');font-display:swap}
+*{margin:0;padding:0;box-sizing:border-box}html,body{overflow-x:hidden;max-width:100vw}
+body{background:#fff;color:#1a1a1a;font-family:'Kalpurush',sans-serif;padding-top:72px}
+#navbar{width:100%;height:72px;background:#fff;border-bottom:1px solid #ece9e0;display:flex;align-items:center;padding:0 20px;position:fixed;top:0;left:0;z-index:100}
+#navbar img{height:50px}
+#wrapper{max-width:760px;margin:0 auto;padding:28px 15px 80px 15px}
+@media(max-width:768px){#wrapper{padding-left:20px;padding-right:20px}}
+h1{font-size:32px;line-height:1.25;padding-bottom:18px;margin-bottom:18px;position:relative;font-weight:700}
+h1::after{content:'';position:absolute;bottom:0;left:0;width:48px;height:3px;background:#111}
+.row-line{height:1px;background:#e5e2d9;margin-bottom:18px}
+.meta-bar{display:flex;gap:8px;font-size:14px;color:#8a877f;margin-bottom:14px;flex-wrap:wrap;align-items:center;border:1px solid #f0ece0;padding:8px 12px;border-radius:5px;width:fit-content}
+#search{width:100%;border:1px solid #f0ece0;background:#fcfaf7;padding:12px 14px;font-size:18px;outline:none;border-radius:5px;margin-bottom:14px;font-family:'Kalpurush'}
+#labelBar{display:flex;gap:8px;overflow-x:auto;padding-bottom:14px;white-space:nowrap}
+.labelBtn{border:1px solid #ece9e0;background:#fff;padding:6px 14px;border-radius:20px;cursor:pointer;font-size:14px;font-family:'Kalpurush';flex-shrink:0}
+.labelBtn.active{background:#111;color:#fff;border-color:#111}
+.section{margin-bottom:32px}
+.sec-head{font-size:20px;font-weight:700;margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.sec-head::before{content:'';width:3px;height:18px;background:#111}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px}
+.card{border:1px solid #ece9e0;border-radius:5px;overflow:hidden;background:#fff}
+.card img{width:100%;height:150px;object-fit:cover;background:#000;display:block}
+.info{padding:10px}
+.date{font-size:12px;color:#8a877f}
+.title{font-size:17px;line-height:1.4;color:#111;text-decoration:none;font-weight:700;display:block;margin-top:4px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+#footer{border-top:1px solid #ece9e0;background:#f5f2eb;padding:20px;text-align:center;font-size:13px;color:#888;margin-top:40px}
+</style>
+</head>
+<body>
+<nav id="navbar"><a href="/"><img src="https://junaedsomrat.github.io/assets/nav.png"></a></nav>
+<div id="wrapper">
+<h1>Blogs</h1>
+<div class="meta-bar" id="metaBar">লোড হচ্ছে...</div>
+<div class="row-line"></div>
+<input id="search" placeholder="ব্লগ সার্চ করুন... টাইটেল, লেবেল, ডিসক্রিপশন">
+<div id="labelBar"></div>
+<div id="container"></div>
+</div>
+<div id="footer">© Junaed Islam Somrat</div>
 
+<script>
+const container=document.getElementById('container'), labelBar=document.getElementById('labelBar'), search=document.getElementById('search'), metaBar=document.getElementById('metaBar');
+let all=[], filtered=[], activeLabel='All', timer=null;
+
+function buildSEO(){
+  const jsonLD={ "@context":"https://schema.org", "@type":"Blog", "name":"Blogs - Junaed Somrat", "url":"https://junaedsomrat.github.io/blog/", "blogPost": all.map(b=>({"@type":"BlogPosting","headline":b.title,"url":"https://junaedsomrat.github.io"+b.link,"datePublished":b.date,"image":b.thumb})) };
+  const s=document.createElement('script'); s.type='application/ld+json'; s.textContent=JSON.stringify(jsonLD); document.head.appendChild(s);
+  metaBar.textContent=`মোট ${all.length} টি ব্লগ • ${[...new Set(all.map(b=>b.genre))].length} টি লেবেল • লেটেস্ট আগে`;
+}
+
+function render(){
+  const q=search.value.toLowerCase().trim();
+  filtered = activeLabel==='All' ? [...all] : all.filter(b=>b.genre===activeLabel);
+  if(q) filtered = filtered.filter(b=>(b.title+b.genre+(b.description||'')).toLowerCase().includes(q));
+  
+  labelBar.innerHTML=''; const labels=['All',...new Set(all.map(b=>b.genre))].filter(Boolean);
+  labels.forEach(l=>{ const btn=document.createElement('button'); btn.className='labelBtn'+(l===activeLabel?' active':''); btn.textContent=l; btn.onclick=()=>{activeLabel=l; render();}; labelBar.appendChild(btn); });
+
+  container.innerHTML='';
+  if(filtered.length===0){ container.innerHTML='<p style="color:#999;padding:20px">কিছু পাওয়া যায়নি</p>'; return; }
+
+  // লেবেল অনুযায়ী গ্রুপ
+  const groups={}; filtered.forEach(b=>{ (groups[b.genre]=groups[b.genre]||[]).push(b); });
+  Object.keys(groups).sort().forEach(genre=>{
+    groups[genre].sort((a,b)=> new Date(b.date)-new Date(a.date));
+    const sec=document.createElement('div'); sec.className='section';
+    sec.innerHTML=`<div class="sec-head">${genre} (${groups[genre].length})</div><div class="grid">${groups[genre].map(b=>`<div class="card"><a href="${b.link}"><img src="${b.thumb}" loading="lazy" alt="${b.title}"></a><div class="info"><div class="date">${b.date} • ${b.genre}</div><a class="title" href="${b.link}">${b.title}</a></div></div>`).join('')}</div>`;
+    container.appendChild(sec);
+  });
+}
+
+function init(data){
+  all=data.sort((a,b)=> new Date(b.date)-new Date(a.date));
+  buildSEO(); render();
+}
+
+fetch('/assets/master-links.json').then(r=>r.json()).then(init).catch(()=>fetch('/assets/feed.json').then(r=>r.json()).then(init).catch(()=>{container.innerHTML='প্রথম ব্লগ আপলোড করার পর feed তৈরি হবে'; metaBar.textContent='কোনো ব্লগ নেই';}));
+
+search.addEventListener('input',()=>{ clearTimeout(timer); timer=setTimeout(render,180); });
+</script>
+</body>
+</html>
