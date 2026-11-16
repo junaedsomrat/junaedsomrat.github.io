@@ -16,4 +16,32 @@ fetch('https://junaedsomrat.github.io/assets/footer-about.json')
     .then(data => {
       document.querySelector('.footer-about').textContent = data.footerAbout;
     });
+      // NOTICE LOGIC - OVER NAV + LINE
+      const noticeBar = document.getElementById('noticeBar');
+      const noticeText = document.getElementById('noticeText');
+      const noticeLine = document.getElementById('noticeLine');
+
+      fetch('/assets/notice.json', { cache: 'no-store' })
+        .then(r => r.json())
+        .then(data => {
+          if(!data || (data.enabled !== 1 && data.enabled !== '1' && data.enabled !== true)) return;
+          const text = (data.text || '').trim();
+          if(!text) return;
+
+          noticeText.textContent = text;
+          noticeBar.classList.add('show');
+          noticeLine.classList.add('run');
+
+          setTimeout(() => {
+            noticeBar.classList.remove('show');
+            noticeBar.classList.add('hide');
+            setTimeout(() => {
+              noticeBar.classList.remove('hide');
+              noticeLine.classList.remove('run');
+            }, 400);
+          }, 5000);
+        })
+        .catch(()=>{});
+    });
+
 document.getElementById('year').textContent = new Date().getFullYear();
