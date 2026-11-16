@@ -9,9 +9,10 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0
+
       - name: Build feed from /blog/*.html
         run: |
           node << 'NODE'
@@ -21,14 +22,8 @@ jobs:
             const blogDir = 'blog';
             if (!fs.existsSync(blogDir)) fs.mkdirSync(blogDir, {recursive:true});
             if (!fs.existsSync('assets')) fs.mkdirSync('assets', {recursive:true});
-            
-            const files = fs.readdirSync(blogDir).filter(f => 
-              f.endsWith('.html') && 
-              f.toLowerCase() !== 'index.html' && 
-              f.toLowerCase() !== 'gen.html'
-            );
+            const files = fs.readdirSync(blogDir).filter(f => f.endsWith('.html') && f.toLowerCase() !== 'index.html' && f.toLowerCase() !== 'gen.html' );
             console.log('Found files:', files);
-
             const blogs = files.map(file => {
               try {
                 const html = fs.readFileSync(path.join(blogDir, file), 'utf8');
@@ -44,14 +39,11 @@ jobs:
                 };
               } catch(e){ console.log('Error parsing', file, e.message); return null; }
             }).filter(Boolean);
-
             blogs.sort((a,b) => new Date(b.date) - new Date(a.date));
-            
             fs.writeFileSync('assets/master-links.json', JSON.stringify(blogs, null, 2));
             fs.writeFileSync('assets/feed.json', JSON.stringify(blogs.slice(0, 50), null, 2));
-
-            // --- SITEMAP AUTO BUILD ---
-            const today = new Date().toISOString(); // 2026-11-16T...
+            // --- SITEMAP ---
+            const today = new Date().toISOString();
             let sitemap = `<?xml version="1.0" encoding="UTF-8"?>\n`;
             sitemap += `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n`;
             sitemap += `  <url><loc>https://junaedsomrat.github.io/</loc><lastmod>${today}</lastmod></url>\n`;
@@ -61,7 +53,6 @@ jobs:
             });
             sitemap += `</urlset>`;
             fs.writeFileSync('sitemap.xml', sitemap);
-            
             console.log('SUCCESS: Built ' + blogs.length + ' blogs + sitemap.xml');
           } catch(err){
             console.log('Build error:', err.message);
@@ -71,26 +62,27 @@ jobs:
           }
           NODE
 
-      - name: Commit files
-        run: |
-          git config user.name "github-actions"
-          git config user.email "actions@github.com"
-          git add assets/master-links.json assets/feed.json sitemap.xml || true
-          git diff --staged --quiet || git commit -m "auto: build feed + sitemap [skip ci]"
-          git push || echo "No push needed"
-
-          - name: Update llms.txt
+      - name: Update llms.txt
         run: |
           LIST=""
           for file in blog/*.html; do
             [ -e "$file" ] || continue
             base=$(basename "$file" .html)
             title=$(echo "$base" | sed 's/_/ /g')
-            LIST="${LIST}- [${title}](https://junaedsomrat.github.io/blog/${base}.html): https://junaedsomrat.github.io/blog/${base}.html\n"
+            LIST="${LIST}- [${title}](https://junaedsomrat.github.io/blog/${base}.html)\n"
           done
-          # Replace auto section
+          if [ ! -f llms.txt ]; then echo -e "# Junaed Somrat\n\n## Blog Posts\n<!-- AUTO_BLOG_LIST -->\n\n## About" > llms.txt; fi
           awk -v list="$LIST" '
-            /<!-- AUTO_BLOG_LIST -->/ {print; print list; f=1; next}
-            f && /<!--.*-->/ {f=0}
+            /<!-- AUTO_BLOG_LIST -->/ {print; printf "%s", list; f=1; next}
+            f && /^## / {f=0}
             !f
           ' llms.txt > llms.tmp && mv llms.tmp llms.txt
+          cat llms.txt
+
+      - name: Commit files
+        run: |
+          git config user.name "github-actions"
+          git config user.email "actions@github.com"
+          git add assets/master-links.json assets/feed.json sitemap.xml llms.txt || true
+          git diff --staged --quiet || git commit -m "auto: build feed + sitemap + llms [skip ci]"
+          git push || echo "No push needed"
