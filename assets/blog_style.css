@@ -1,6 +1,6 @@
     @font-face {
       font-family: 'Kalpurush';
-      src: url('/assets/Kalpurush.ttf') format('truetype');
+      src: url('https://raw.githubusercontent.com/junaedsomrat/junaedsomrat.github.io/refs/heads/main/assets/kalpurush.ttf') format('truetype');
       font-display: swap;
     }
     * {
