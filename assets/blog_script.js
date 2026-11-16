@@ -21,7 +21,7 @@ fetch('https://junaedsomrat.github.io/assets/footer-about.json')
       const noticeText = document.getElementById('noticeText');
       const noticeLine = document.getElementById('noticeLine');
 
-      fetch('/assets/notice.json', { cache: 'no-store' })
+      fetch('https://junaedsomrat.github.io/assets/notice.json', { cache: 'no-store' })
         .then(r => r.json())
         .then(data => {
           if(!data || (data.enabled !== 1 && data.enabled !== '1' && data.enabled !== true)) return;
