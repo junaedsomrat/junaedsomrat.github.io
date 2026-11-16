@@ -2,28 +2,73 @@ name: Build Feed
 on:
   push:
     branches: [ main ]
+  workflow_dispatch:
+
+permissions:
+  contents: write
 
 jobs:
   build:
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
     steps:
-      - uses: actions/checkout@v4
-
-      - name: Generate feed.json
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          
+      - name: Build feed from /blog/*.html
         run: |
-          node -e "
-            const fs = require('fs');
-            const master = JSON.parse(fs.readFileSync('assets/master-links.json','utf8'));
-            const feed = master.sort((a,b) => new Date(b.date) - new Date(a.date)).slice(0,20);
-            fs.writeFileSync('assets/feed.json', JSON.stringify(feed, null, 2));
-          "
+          node << 'NODE'
+          const fs = require('fs');
+          const path = require('path');
+          try {
+            const blogDir = 'blog';
+            if (!fs.existsSync(blogDir)) fs.mkdirSync(blogDir, {recursive:true});
+            if (!fs.existsSync('assets')) fs.mkdirSync('assets', {recursive:true});
+            
+            const files = fs.readdirSync(blogDir).filter(f => 
+              f.endsWith('.html') && 
+              f.toLowerCase() !== 'index.html' && 
+              f.toLowerCase() !== 'gen.html'
+            );
 
-      - name: Commit feed.json
+            console.log('Found files:', files);
+
+            const blogs = files.map(file => {
+              try {
+                const html = fs.readFileSync(path.join(blogDir, file), 'utf8');
+                const get = (re) => {
+                  const m = html.match(re);
+                  return m ? m[1].trim() : '';
+                };
+                return {
+                  title: get(/<meta property="og:title" content="([^"]+)"/) || get(/<title>([^<]+)<\/title>/) || file.replace('.html',''),
+                  link: '/blog/' + file,
+                  thumb: get(/<meta property="og:image" content="([^"]+)"/) || 'https://junaedsomrat.github.io/assets/auto-thumbnail.jpg',
+                  description: get(/<meta name="description" content="([^"]+)"/),
+                  genre: get(/<meta name="genre" content="([^"]+)"/) || 'blog',
+                  date: get(/<meta name="published-date" content="([^"]+)"/) || '1970-01-01',
+                  datetime: get(/<meta name="published-datetime" content="([^"]+)"/) || ''
+                };
+              } catch(e){ console.log('Error parsing', file, e.message); return null; }
+            }).filter(Boolean);
+
+            blogs.sort((a,b) => new Date(b.date) - new Date(a.date));
+            
+            fs.writeFileSync('assets/master-links.json', JSON.stringify(blogs, null, 2));
+            fs.writeFileSync('assets/feed.json', JSON.stringify(blogs.slice(0, 50), null, 2));
+            console.log('SUCCESS: Built ' + blogs.length + ' blogs');
+          } catch(err){
+            console.log('Build error but creating empty files:', err.message);
+            if (!fs.existsSync('assets')) fs.mkdirSync('assets', {recursive:true});
+            if (!fs.existsSync('assets/master-links.json')) fs.writeFileSync('assets/master-links.json','[]');
+            if (!fs.existsSync('assets/feed.json')) fs.writeFileSync('assets/feed.json','[]');
+          }
+          NODE
+
+      - name: Commit files
         run: |
           git config user.name "github-actions"
           git config user.email "actions@github.com"
-          git add assets/feed.json
-          git commit -m "auto: update feed" || echo "no change"
-          git push
+          git add assets/master-links.json assets/feed.json || true
+          git diff --staged --quiet || git commit -m "auto: build feed [skip ci]"
+          git push || echo "No push needed"
