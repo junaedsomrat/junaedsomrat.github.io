@@ -1,0 +1,29 @@
+name: Build Feed
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Generate feed.json
+        run: |
+          node -e "
+            const fs = require('fs');
+            const master = JSON.parse(fs.readFileSync('assets/master-links.json','utf8'));
+            const feed = master.sort((a,b) => new Date(b.date) - new Date(a.date)).slice(0,20);
+            fs.writeFileSync('assets/feed.json', JSON.stringify(feed, null, 2));
+          "
+
+      - name: Commit feed.json
+        run: |
+          git config user.name "github-actions"
+          git config user.email "actions@github.com"
+          git add assets/feed.json
+          git commit -m "auto: update feed" || echo "no change"
+          git push
