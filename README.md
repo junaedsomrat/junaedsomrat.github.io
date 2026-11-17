@@ -45,7 +45,7 @@ Explore my thoughts, articles and personal writings.
 
 "Read Blogs & Articles →" (https://junaedsomrat.github.io/blog)
 
-Connect With Me
+Follow Khetrofol
 
 <p align="left">
   <a href="https://m.facebook.com/KhetrofolBangla">
