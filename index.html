@@ -1,428 +1,2465 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="bn">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <!-- SEO and Google Indexing Tags -->
-    <title>Junaed Somrat | Content Creator</title>
-    <meta name="description" content="Junaed Somrat is a Bangladeshi content creator who creates content and also write books.">
-    <meta name="keywords" content="Junaed Somrat, Junaed, Somrat, Content Creator, Vocalist, Bangladeshi Writer, Books, Junaed Somrat Official">
-    <meta name="author" content="Junaed Somrat">
+    <meta name="theme-color" content="#f6f3eb">
+    <meta name="color-scheme" content="light">
+    <meta name="author" content="Junaed Islam Somrat">
+    <meta name="description" content="Junaed Islam Somrat-এর ব্যক্তিগত ওয়েবসাইট। ফটোগ্রাফি, লেখালেখি, কনটেন্ট ক্রিয়েশন এবং রহস্যময় অজানা বিষয় নিয়ে তাঁর কাজ সম্পর্কে জানুন।">
+    <meta name="keywords" content="Junaed Islam Somrat, Junaed Somrat, Khetrofol, Photographer, Writer, Content Creator">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://junaedsomrat.github.io/">
-    <meta name="google-site-verification" content="H_rIJDUtDtSYCQ1I2PVT_ftE_WeaCxBWC3lVT_-0hZI" />
-    <!-- Open Graph / Facebook -->
+      <meta name="google-site-verification" content="H_rIJDUtDtSYCQ1I2PVT_ftE_WeaCxBWC3lVT_-0hZI" />
+
     <meta property="og:type" content="website">
+    <meta property="og:title" content="Junaed Islam Somrat — Personal Website">
+    <meta property="og:description" content="ফটোগ্রাফি, লেখালেখি ও রহস্যময় কনটেন্টের জগতে আমার ছোট্ট পরিচয়।">
     <meta property="og:url" content="https://junaedsomrat.github.io/">
-    <meta property="og:title" content="Junaed Somrat | Content Creator">
-    <meta property="og:description" content="Official website of Junaed Somrat">
-    <meta property="og:image" content="https://junaedsomrat.github.io/assets/image_01.png">
+    <meta property="og:image" content="https://junaedsomrat.github.io/images/profile.jpg">
+    <meta property="og:locale" content="bn_BD">
 
-    <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://junaedsomrat.github.io/">
-    <meta property="twitter:title" content="Junaed Somrat | Content Creator">
-    <meta property="twitter:description" content="Official website of Junaed Somrat">
-    <meta property="twitter:image" content="https://junaedsomrat.github.io/assets/image_01.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Junaed Islam Somrat">
+    <meta name="twitter:description" content="Personal website of Junaed Islam Somrat.">
+    <meta name="twitter:image" content="https://junaedsomrat.github.io/images/profile.jpg">
 
-    <!-- Website Favicon -->
-    <link rel="icon" type="image/png" href="https://junaedsomrat.github.io/assets/favicon.png">
+    <title>Junaed Somrat | Official Website</title>
 
-    <!-- Google Fonts (Inter) -->
+    <link rel="preload" href="" as="font" type="font/ttf" crossorigin>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-
-    <!-- Tailwind CSS for modern structure and layout utilities -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                    },
-                }
-            }
-        }
-    </script>
 
     <style>
-        /* Custom Styles to match exact visual layout */
+        /* =========================================================
+           01. FONT
+        ========================================================= */
+        @font-face {
+            font-family: "Kalpurush";
+            src: url("") format("truetype");
+            font-style: normal;
+            font-weight: 100 900;
+            font-display: swap;
+        }
+
+        /* =========================================================
+           02. DESIGN TOKENS
+        ========================================================= */
+        :root {
+            --page: #f6f3eb;
+            --surface: #ffffff;
+            --surface-soft: #fbfaf7;
+            --ink: #171717;
+            --ink-soft: #45433e;
+            --muted: #858178;
+            --line: #e9e5dc;
+            --accent: #a17b4c;
+            --accent-dark: #795b36;
+            --dark: #171717;
+            --footer: #f1eee6;
+            --shadow-sm: 0 8px 24px rgba(30, 27, 20, 0.045);
+            --shadow-md: 0 18px 55px rgba(30, 27, 20, 0.085);
+            --shadow-lg: 0 28px 90px rgba(30, 27, 20, 0.13);
+            --radius-sm: 12px;
+            --radius-md: 20px;
+            --radius-lg: 30px;
+            --radius-xl: 38px;
+            --container: 1120px;
+            --nav-height: 76px;
+            --ease: cubic-bezier(.2, .7, .2, 1);
+        }
+
+        /* =========================================================
+           03. RESET AND BASE
+        ========================================================= */
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 100px;
+        }
+
         body {
-            font-family: 'Inter', sans-serif;
-            background-color: #ffffff;
-            color: #000000;
-            overflow-x: hidden;
+            margin: 0;
+            min-width: 320px;
+            background: var(--page);
+            color: var(--ink);
+            font-family: "Kalpurush", sans-serif;
+            font-size: 17px;
+            line-height: 1.75;
+            -webkit-font-smoothing: antialiased;
+            text-rendering: optimizeLegibility;
+        }
+
+        body,
+        button,
+        a {
             -webkit-tap-highlight-color: transparent;
         }
 
-        /* Continuous Horizontal Auto-Scroll (no controls, touch-disabled) */
-        .marquee-container {
-            position: relative;
-            width: 100%;
-            overflow: hidden;
-            pointer-events: none; /* Prevents interaction, hover, touch, or drag interruption */
+        body::selection {
+            background: rgba(161, 123, 76, .22);
+            color: var(--ink);
         }
 
-        /* Opacity gradient mask on both sides matching image 1 */
-        .marquee-container::before,
-        .marquee-container::after {
+        img {
+            display: block;
+            max-width: 100%;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        button {
+            color: inherit;
+            font: inherit;
+        }
+
+        button,
+        a {
+            touch-action: manipulation;
+        }
+
+        button:focus-visible,
+        a:focus-visible {
+            outline: 3px solid rgba(161, 123, 76, .55);
+            outline-offset: 4px;
+        }
+
+        .container {
+            width: min(var(--container), calc(100% - 56px));
+            margin-inline: auto;
+        }
+
+        .section {
+            padding: 112px 0;
+        }
+
+        .section-heading {
+            max-width: 680px;
+            margin: 0 auto 52px;
+            text-align: center;
+        }
+
+        .eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 13px;
+            color: var(--accent-dark);
+            font-size: 14px;
+            font-weight: 700;
+            letter-spacing: .12em;
+        }
+
+        .eyebrow::before,
+        .eyebrow::after {
+            width: 24px;
+            height: 1px;
+            background: currentColor;
             content: "";
-            position: absolute;
+            opacity: .55;
+        }
+
+        .section-title {
+            margin: 0;
+            font-size: clamp(34px, 5vw, 52px);
+            font-weight: 700;
+            line-height: 1.2;
+            letter-spacing: -.025em;
+        }
+
+        .section-description {
+            max-width: 570px;
+            margin: 15px auto 0;
+            color: var(--muted);
+            font-size: 17px;
+        }
+
+        .accent-text {
+            color: var(--accent-dark);
+        }
+
+        /* =========================================================
+           04. NAVIGATION
+        ========================================================= */
+        .site-header {
+            position: sticky;
+            z-index: 1000;
             top: 0;
-            width: 80px;
-            height: 100%;
-            z-index: 10;
-        }
-        .marquee-container::before {
-            left: 0;
-            background: linear-gradient(to right, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0) 100%);
-        }
-        .marquee-container::after {
-            right: 0;
-            background: linear-gradient(to left, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0) 100%);
+            width: 100%;
+            height: var(--nav-height);
+            border-bottom: 1px solid rgba(233, 229, 220, .8);
+            background: rgba(255, 255, 255, .88);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
         }
 
-        .marquee-track {
+        .nav-inner {
             display: flex;
-            width: max-content;
-            animation: scrollMarquee 20s linear infinite;
+            width: min(1240px, calc(100% - 48px));
+            height: 100%;
+            align-items: center;
+            justify-content: space-between;
+            margin-inline: auto;
         }
 
-        @keyframes scrollMarquee {
-            0% {
-                transform: translateX(0);
-            }
-            100% {
-                transform: translateX(-50%);
-            }
+        .brand {
+            display: inline-flex;
+            min-width: 0;
+            align-items: center;
+            gap: 12px;
         }
 
-        /* Specific design match for Blog Headers with black-to-gray horizontal gradient rounded badge */
-        .blog-header-badge {
-            background: linear-gradient(90deg, #4b4b4b 0%, #1a1a1a 100%);
-            border-top-right-radius: 50px;
-            border-bottom-right-radius: 50px;
+        .brand-logo {
+            width: 42px;
+            height: 42px;
+            object-fit: contain;
         }
 
-        /* Blog list elements fade-in visual on scroll class */
+        .brand-name {
+            overflow: hidden;
+            color: var(--ink);
+            font-size: 19px;
+            font-weight: 700;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nav-link {
+            display: inline-flex;
+            min-height: 44px;
+            align-items: center;
+            justify-content: center;
+            padding: 8px 17px;
+            border-radius: 999px;
+            color: var(--ink-soft);
+            font-size: 16px;
+            transition: background .25s var(--ease), color .25s var(--ease), transform .25s var(--ease);
+        }
+
+        .nav-link:hover {
+            transform: translateY(-1px);
+            background: var(--page);
+            color: var(--ink);
+        }
+
+        .nav-link-primary {
+            padding-inline: 22px;
+            background: var(--dark);
+            color: #fff;
+        }
+
+        .nav-link-primary:hover {
+            background: var(--accent-dark);
+            color: #fff;
+        }
+
+        .menu-toggle {
+            display: none;
+            width: 44px;
+            height: 44px;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid var(--line);
+            border-radius: 50%;
+            background: var(--surface);
+            cursor: pointer;
+        }
+
+        .menu-toggle svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        /* =========================================================
+           05. HERO
+        ========================================================= */
+        .hero {
+            position: relative;
+            display: grid;
+            min-height: 680px;
+            overflow: hidden;
+            align-items: center;
+            isolation: isolate;
+            background: #e8e2d7;
+        }
+
+        .hero-background {
+            position: absolute;
+            z-index: -3;
+            inset: 0;
+            background-image: url("https://junaedsomrat.github.io/images/banner.jpg");
+            background-position: center 43%;
+            background-size: cover;
+            filter: saturate(.72);
+            transform: scale(1.025);
+        }
+
+        .hero-overlay {
+            position: absolute;
+            z-index: -2;
+            inset: 0;
+            background:
+                linear-gradient(90deg, rgba(246, 243, 235, .96) 0%, rgba(246, 243, 235, .88) 42%, rgba(246, 243, 235, .50) 100%),
+                linear-gradient(0deg, rgba(246, 243, 235, .55), rgba(246, 243, 235, .18));
+        }
+
+        .hero-grain {
+            position: absolute;
+            z-index: -1;
+            inset: 0;
+            pointer-events: none;
+            opacity: .12;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.2'/%3E%3C/svg%3E");
+        }
+
+        .hero-content {
+            display: grid;
+            grid-template-columns: minmax(0, 1.2fr) minmax(280px, .8fr);
+            align-items: center;
+            gap: 72px;
+            padding-top: 76px;
+            padding-bottom: 76px;
+        }
+
+        .hero-copy {
+            max-width: 650px;
+        }
+
+        .hero-kicker {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 24px;
+            padding: 8px 15px;
+            border: 1px solid rgba(121, 91, 54, .22);
+            border-radius: 999px;
+            background: rgba(255, 255, 255, .46);
+            color: var(--accent-dark);
+            font-size: 14px;
+            font-weight: 700;
+            backdrop-filter: blur(8px);
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #78936c;
+            box-shadow: 0 0 0 4px rgba(120, 147, 108, .14);
+        }
+
+        .hero-title {
+            margin: 0;
+            font-size: clamp(48px, 7.2vw, 82px);
+            font-weight: 700;
+            line-height: 1.08;
+            letter-spacing: -.045em;
+        }
+
+        .hero-title span {
+            display: block;
+            color: var(--accent-dark);
+        }
+
+        .hero-subtitle {
+            max-width: 570px;
+            margin: 25px 0 0;
+            color: #555148;
+            font-size: clamp(18px, 2vw, 21px);
+            line-height: 1.8;
+        }
+
+        .hero-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 13px;
+            margin-top: 34px;
+        }
+
+        .button {
+            display: inline-flex;
+            min-height: 54px;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 12px 23px;
+            border: 1px solid transparent;
+            border-radius: 999px;
+            font-size: 16px;
+            font-weight: 700;
+            transition: transform .25s var(--ease), background .25s var(--ease), box-shadow .25s var(--ease);
+        }
+
+        .button:hover {
+            transform: translateY(-3px);
+        }
+
+        .button-dark {
+            background: var(--dark);
+            color: #fff;
+            box-shadow: 0 10px 25px rgba(23, 23, 23, .13);
+        }
+
+        .button-dark:hover {
+            background: var(--accent-dark);
+            box-shadow: 0 14px 30px rgba(121, 91, 54, .2);
+        }
+
+        .button-light {
+            border-color: rgba(23, 23, 23, .16);
+            background: rgba(255, 255, 255, .5);
+            color: var(--ink);
+            backdrop-filter: blur(8px);
+        }
+
+        .button-light:hover {
+            background: #fff;
+        }
+
+        .button svg {
+            width: 18px;
+            height: 18px;
+            flex: 0 0 auto;
+        }
+
+        .hero-visual {
+            position: relative;
+            display: flex;
+            min-height: 420px;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .portrait-frame {
+            position: relative;
+            width: min(100%, 360px);
+            aspect-ratio: 4 / 5;
+            padding: 11px;
+            border: 1px solid rgba(255, 255, 255, .7);
+            border-radius: 190px 190px 34px 34px;
+            background: rgba(255, 255, 255, .42);
+            box-shadow: var(--shadow-lg);
+            transform: rotate(2deg);
+            backdrop-filter: blur(10px);
+        }
+
+        .portrait-frame::before {
+            position: absolute;
+            z-index: -1;
+            inset: -17px 17px 17px -17px;
+            border: 1px solid rgba(121, 91, 54, .4);
+            border-radius: 190px 190px 34px 34px;
+            content: "";
+        }
+
+        .portrait-image {
+            width: 100%;
+            height: 100%;
+            border-radius: 180px 180px 25px 25px;
+            object-fit: cover;
+            object-position: center 35%;
+        }
+
+        .portrait-caption {
+            position: absolute;
+            right: -23px;
+            bottom: 35px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 17px;
+            border: 1px solid rgba(233, 229, 220, .9);
+            border-radius: 15px;
+            background: rgba(255, 255, 255, .92);
+            box-shadow: var(--shadow-md);
+            transform: rotate(-2deg);
+        }
+
+        .caption-icon {
+            display: grid;
+            width: 36px;
+            height: 36px;
+            place-items: center;
+            border-radius: 11px;
+            background: var(--page);
+            color: var(--accent-dark);
+        }
+
+        .caption-icon svg {
+            width: 19px;
+            height: 19px;
+        }
+
+        .caption-text {
+            line-height: 1.35;
+        }
+
+        .caption-text strong {
+            display: block;
+            font-size: 14px;
+        }
+
+        .caption-text span {
+            color: var(--muted);
+            font-size: 12px;
+        }
+
+        /* =========================================================
+           06. QUICK FACTS
+        ========================================================= */
+        .quick-facts-wrap {
+            position: relative;
+            z-index: 3;
+            margin-top: -42px;
+        }
+
+        .quick-facts {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            overflow: hidden;
+            border: 1px solid rgba(233, 229, 220, .9);
+            border-radius: var(--radius-md);
+            background: var(--surface);
+            box-shadow: var(--shadow-md);
+        }
+
+        .fact {
+            display: flex;
+            min-height: 112px;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+            padding: 20px;
+        }
+
+        .fact + .fact {
+            border-left: 1px solid var(--line);
+        }
+
+        .fact-icon {
+            display: grid;
+            width: 46px;
+            height: 46px;
+            flex: 0 0 auto;
+            place-items: center;
+            border-radius: 14px;
+            background: var(--page);
+            color: var(--accent-dark);
+        }
+
+        .fact-icon svg {
+            width: 22px;
+            height: 22px;
+        }
+
+        .fact-copy strong {
+            display: block;
+            font-size: 19px;
+            line-height: 1.3;
+        }
+
+        .fact-copy span {
+            color: var(--muted);
+            font-size: 14px;
+        }
+
+        /* =========================================================
+           07. ABOUT
+        ========================================================= */
+        .about-section {
+            padding-top: 120px;
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: .85fr 1.15fr;
+            align-items: center;
+            gap: 82px;
+        }
+
+        .about-art {
+            position: relative;
+            min-height: 480px;
+        }
+
+        .about-art-card {
+            position: absolute;
+            inset: 0 35px 25px 0;
+            overflow: hidden;
+            border-radius: var(--radius-xl);
+            background: #e7dfd2;
+            box-shadow: var(--shadow-md);
+        }
+
+        .about-art-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+        }
+
+        .about-art-note {
+            position: absolute;
+            right: 0;
+            bottom: 0;
+            width: 205px;
+            padding: 22px;
+            border: 1px solid var(--line);
+            border-radius: var(--radius-md);
+            background: var(--surface);
+            box-shadow: var(--shadow-md);
+        }
+
+        .about-art-note strong {
+            display: block;
+            color: var(--accent-dark);
+            font-size: 32px;
+            line-height: 1.2;
+        }
+
+        .about-art-note span {
+            color: var(--muted);
+            font-size: 14px;
+        }
+
+        .about-copy .eyebrow {
+            margin-bottom: 12px;
+        }
+
+        .about-copy h2 {
+            margin: 0;
+            font-size: clamp(34px, 4vw, 48px);
+            line-height: 1.25;
+        }
+
+        .about-copy p {
+            margin: 20px 0 0;
+            color: var(--ink-soft);
+            font-size: 18px;
+            line-height: 1.95;
+        }
+
+        .about-copy p + p {
+            margin-top: 13px;
+        }
+
+        .about-details {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 12px;
+            margin-top: 30px;
+        }
+
+        .detail-item {
+            display: flex;
+            min-height: 58px;
+            align-items: center;
+            gap: 11px;
+            padding: 12px 14px;
+            border: 1px solid var(--line);
+            border-radius: 13px;
+            background: rgba(255, 255, 255, .62);
+        }
+
+        .detail-item svg {
+            width: 18px;
+            height: 18px;
+            flex: 0 0 auto;
+            color: var(--accent-dark);
+        }
+
+        .detail-item span {
+            color: var(--ink-soft);
+            font-size: 15px;
+        }
+
+        /* =========================================================
+           08. INTERESTS
+        ========================================================= */
+        .interests-section {
+            background: var(--surface);
+        }
+
+        .interest-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 20px;
+        }
+
+        .interest-card {
+            position: relative;
+            min-height: 270px;
+            overflow: hidden;
+            padding: 30px;
+            border: 1px solid var(--line);
+            border-radius: var(--radius-md);
+            background: var(--surface-soft);
+            transition: transform .35s var(--ease), box-shadow .35s var(--ease), border-color .35s var(--ease);
+        }
+
+        .interest-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(161, 123, 76, .38);
+            box-shadow: var(--shadow-md);
+        }
+
+        .interest-number {
+            position: absolute;
+            top: 19px;
+            right: 24px;
+            color: rgba(121, 91, 54, .16);
+            font-size: 46px;
+            font-weight: 700;
+            line-height: 1;
+        }
+
+        .interest-icon {
+            display: grid;
+            width: 58px;
+            height: 58px;
+            place-items: center;
+            margin-bottom: 25px;
+            border-radius: 17px;
+            background: #eee8dc;
+            color: var(--accent-dark);
+        }
+
+        .interest-icon svg {
+            width: 27px;
+            height: 27px;
+        }
+
+        .interest-card h3 {
+            margin: 0;
+            font-size: 25px;
+        }
+
+        .interest-card p {
+            margin: 10px 0 0;
+            color: var(--muted);
+            font-size: 16px;
+            line-height: 1.8;
+        }
+
+        /* =========================================================
+           09. CREATOR / KHETROFOL
+        ========================================================= */
+        .creator-section {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .creator-section::before {
+            position: absolute;
+            top: 80px;
+            right: -170px;
+            width: 430px;
+            height: 430px;
+            border: 1px solid rgba(161, 123, 76, .14);
+            border-radius: 50%;
+            content: "";
+        }
+
+        .creator-card {
+            position: relative;
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) 320px;
+            align-items: center;
+            gap: 55px;
+            overflow: hidden;
+            padding: 58px;
+            border-radius: var(--radius-xl);
+            background: #191919;
+            color: #fff;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .creator-card::after {
+            position: absolute;
+            top: -180px;
+            right: 150px;
+            width: 420px;
+            height: 420px;
+            border: 1px solid rgba(255, 255, 255, .08);
+            border-radius: 50%;
+            content: "";
+            pointer-events: none;
+        }
+
+        .creator-copy {
+            position: relative;
+            z-index: 1;
+        }
+
+        .creator-kicker {
+            display: inline-flex;
+            align-items: center;
+            gap: 9px;
+            margin-bottom: 16px;
+            color: #d8bd98;
+            font-size: 14px;
+            font-weight: 700;
+            letter-spacing: .08em;
+        }
+
+        .creator-kicker span {
+            width: 22px;
+            height: 1px;
+            background: currentColor;
+        }
+
+        .creator-copy h2 {
+            max-width: 620px;
+            margin: 0;
+            font-size: clamp(34px, 4.5vw, 52px);
+            line-height: 1.25;
+        }
+
+        .creator-copy p {
+            max-width: 620px;
+            margin: 18px 0 0;
+            color: rgba(255, 255, 255, .68);
+            font-size: 17px;
+            line-height: 1.9;
+        }
+
+        .creator-button {
+            display: inline-flex;
+            min-height: 51px;
+            align-items: center;
+            gap: 10px;
+            margin-top: 28px;
+            padding: 11px 21px;
+            border-radius: 999px;
+            background: #fff;
+            color: #171717;
+            font-size: 16px;
+            font-weight: 700;
+            transition: transform .25s var(--ease), background .25s var(--ease);
+        }
+
+        .creator-button:hover {
+            transform: translateY(-3px);
+            background: #e9ddca;
+        }
+
+        .creator-button svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        .channel-art {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .channel-art img {
+            width: min(100%, 270px);
+            aspect-ratio: 1;
+            border: 1px solid rgba(255, 255, 255, .14);
+            border-radius: 34px;
+            background: rgba(255, 255, 255, .06);
+            object-fit: contain;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, .28);
+            transition: transform .4s var(--ease);
+        }
+
+        .channel-art img:hover {
+            transform: rotate(-4deg) scale(1.035);
+        }
+
+        /* =========================================================
+           10. PERSONAL APPROACH
+        ========================================================= */
+        .approach-section {
+            padding-top: 35px;
+        }
+
+        .approach-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 20px;
+        }
+
+        .approach-card {
+            display: flex;
+            align-items: flex-start;
+            gap: 18px;
+            padding: 26px;
+            border: 1px solid var(--line);
+            border-radius: var(--radius-md);
+            background: rgba(255, 255, 255, .72);
+        }
+
+        .approach-icon {
+            display: grid;
+            width: 48px;
+            height: 48px;
+            flex: 0 0 auto;
+            place-items: center;
+            border-radius: 15px;
+            background: #eee8dc;
+            color: var(--accent-dark);
+        }
+
+        .approach-icon svg {
+            width: 22px;
+            height: 22px;
+        }
+
+        .approach-card h3 {
+            margin: 0;
+            font-size: 21px;
+        }
+
+        .approach-card p {
+            margin: 7px 0 0;
+            color: var(--muted);
+            font-size: 15px;
+            line-height: 1.8;
+        }
+
+        /* =========================================================
+           11. BLOG FEATURE
+        ========================================================= */
+        .blog-section {
+            padding-top: 35px;
+        }
+
+        .blog-feature {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 35px;
+            padding: 42px 46px;
+            border: 1px solid var(--line);
+            border-radius: var(--radius-lg);
+            background: var(--surface);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .blog-feature-copy {
+            max-width: 650px;
+        }
+
+        .blog-feature-copy .eyebrow {
+            margin-bottom: 8px;
+        }
+
+        .blog-feature-copy h2 {
+            margin: 0;
+            font-size: clamp(28px, 3.5vw, 40px);
+            line-height: 1.3;
+        }
+
+        .blog-feature-copy p {
+            margin: 10px 0 0;
+            color: var(--muted);
+            font-size: 16px;
+        }
+
+        .blog-feature .button {
+            flex: 0 0 auto;
+        }
+
+        /* =========================================================
+           12. SOCIAL LINKS
+        ========================================================= */
+        .social-section {
+            padding-top: 35px;
+            padding-bottom: 120px;
+        }
+
+        .social-grid {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 15px;
+        }
+
+        .social-card {
+            display: flex;
+            min-height: 112px;
+            align-items: center;
+            gap: 15px;
+            padding: 20px;
+            border: 1px solid var(--line);
+            border-radius: 17px;
+            background: rgba(255, 255, 255, .8);
+            transition: transform .3s var(--ease), box-shadow .3s var(--ease), border-color .3s var(--ease);
+        }
+
+        .social-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(161, 123, 76, .38);
+            box-shadow: var(--shadow-md);
+        }
+
+        .social-icon {
+            display: grid;
+            width: 48px;
+            height: 48px;
+            flex: 0 0 auto;
+            place-items: center;
+            border-radius: 15px;
+            background: var(--page);
+            color: var(--ink);
+        }
+
+        .social-icon svg {
+            width: 23px;
+            height: 23px;
+        }
+
+        .social-name {
+            display: block;
+            font-size: 17px;
+            font-weight: 700;
+            line-height: 1.3;
+        }
+
+        .social-handle {
+            display: block;
+            margin-top: 4px;
+            color: var(--muted);
+            font-size: 13px;
+            overflow-wrap: anywhere;
+        }
+
+        /* =========================================================
+           13. FOOTER
+        ========================================================= */
+        .site-footer {
+            padding: 70px 0 25px;
+            background: var(--footer);
+        }
+
+        .footer-top {
+            display: grid;
+            grid-template-columns: 1.2fr .8fr;
+            gap: 60px;
+            padding-bottom: 48px;
+        }
+
+        .footer-brand {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .footer-brand img {
+            width: 44px;
+            height: 44px;
+            object-fit: contain;
+        }
+
+        .footer-brand strong {
+            font-size: 20px;
+        }
+
+        .footer-about {
+            max-width: 470px;
+            margin: 17px 0 0;
+            color: #777267;
+            font-size: 15px;
+            line-height: 1.9;
+        }
+
+        .footer-right {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+        }
+
+        .footer-heading {
+            margin: 0 0 15px;
+            font-size: 18px;
+        }
+
+        .footer-nav {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+            gap: 9px 20px;
+        }
+
+        .footer-nav a {
+            color: #6e695f;
+            font-size: 15px;
+            transition: color .2s ease;
+        }
+
+        .footer-nav a:hover {
+            color: var(--accent-dark);
+        }
+
+        .footer-bottom {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            padding-top: 22px;
+            border-top: 1px solid #dfdbd1;
+        }
+
+        .copyright {
+            margin: 0;
+            color: #898479;
+            font-size: 13px;
+        }
+
+        .powered {
+            display: flex;
+            align-items: center;
+            gap: 9px;
+            color: #898479;
+            font-size: 13px;
+        }
+
+        .powered img {
+            width: 82px;
+            max-height: 30px;
+            object-fit: contain;
+        }
+
+        /* =========================================================
+           14. BACK TO TOP
+        ========================================================= */
+        .back-to-top {
+            position: fixed;
+            z-index: 900;
+            right: 25px;
+            bottom: 25px;
+            display: grid;
+            width: 48px;
+            height: 48px;
+            place-items: center;
+            border: 1px solid rgba(233, 229, 220, .9);
+            border-radius: 50%;
+            background: rgba(255, 255, 255, .92);
+            color: var(--ink);
+            box-shadow: var(--shadow-md);
+            cursor: pointer;
+            opacity: 0;
+            pointer-events: none;
+            transform: translateY(12px);
+            transition: opacity .25s ease, transform .25s ease, background .25s ease;
+            backdrop-filter: blur(12px);
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+            pointer-events: auto;
+            transform: translateY(0);
+        }
+
+        .back-to-top:hover {
+            background: var(--page);
+        }
+
+        .back-to-top svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        /* =========================================================
+           15. REVEAL ANIMATIONS
+        ========================================================= */
         .reveal {
             opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.8s ease, transform 0.8s ease;
+            transform: translateY(24px);
+            transition: opacity .75s var(--ease), transform .75s var(--ease);
         }
-        .reveal.active {
+
+        .reveal.is-visible {
             opacity: 1;
             transform: translateY(0);
         }
 
-        /* Left slide-in with NO FADE for the blog heading section */
-        .slide-left {
-            transform: translateX(-150px);
-            transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-        .slide-left.active {
-            transform: translateX(0);
+        .reveal-delay-1 {
+            transition-delay: .08s;
         }
 
-        /* Custom Card Drop Shadows to match exactly with Screenshot 2 */
-        .blog-card {
-            filter: drop-shadow(0px 8px 16px rgba(0, 0, 0, 0.15));
-            border-radius: 24px;
-            overflow: hidden;
-            background-color: #ffffff;
-            transition: transform 0.3s ease;
-        }
-        .blog-card:hover {
-            transform: translateY(-4px);
+        .reveal-delay-2 {
+            transition-delay: .16s;
         }
 
-        .blog-thumbnail-wrapper {
-            aspect-ratio: 16/9;
-            background: linear-gradient(180deg, #2b2b2b 0%, #111111 100%);
-            position: relative;
-            overflow: hidden;
+        .reveal-delay-3 {
+            transition-delay: .24s;
         }
 
-        /* Social Media Icons Styling as shown in Screenshot 3 */
-        .social-btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            background-color: #1a1a1a;
-            border-radius: 50%;
-            transition: transform 0.2s ease, background-color 0.2s ease;
+        /* =========================================================
+           16. RESPONSIVE — TABLET
+        ========================================================= */
+        @media (max-width: 980px) {
+            :root {
+                --container: 820px;
+            }
+
+            .hero-content {
+                grid-template-columns: minmax(0, 1fr) 300px;
+                gap: 38px;
+            }
+
+            .hero-visual {
+                min-height: 370px;
+            }
+
+            .portrait-frame {
+                width: 290px;
+            }
+
+            .about-grid {
+                gap: 48px;
+            }
+
+            .creator-card {
+                grid-template-columns: minmax(0, 1fr) 240px;
+                gap: 30px;
+                padding: 42px;
+            }
+
+            .channel-art img {
+                width: 220px;
+            }
+
+            .social-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
         }
-        .social-btn:hover {
-            transform: scale(1.08);
-            background-color: #000000;
+
+        /* =========================================================
+           17. RESPONSIVE — MOBILE NAVIGATION
+        ========================================================= */
+        @media (max-width: 720px) {
+            :root {
+                --nav-height: 68px;
+            }
+
+            .container {
+                width: min(100% - 36px, 560px);
+            }
+
+            .nav-inner {
+                width: calc(100% - 32px);
+            }
+
+            .brand-logo {
+                width: 38px;
+                height: 38px;
+            }
+
+            .brand-name {
+                max-width: 190px;
+                font-size: 17px;
+            }
+
+            .menu-toggle {
+                display: inline-flex;
+            }
+
+            .nav-links {
+                position: absolute;
+                top: calc(100% + 8px);
+                right: 16px;
+                left: 16px;
+                display: flex;
+                flex-direction: column;
+                align-items: stretch;
+                gap: 5px;
+                padding: 12px;
+                border: 1px solid var(--line);
+                border-radius: 18px;
+                background: rgba(255, 255, 255, .98);
+                box-shadow: var(--shadow-md);
+                opacity: 0;
+                pointer-events: none;
+                transform: translateY(-8px);
+                transition: opacity .22s ease, transform .22s ease;
+            }
+
+            .nav-links.open {
+                opacity: 1;
+                pointer-events: auto;
+                transform: translateY(0);
+            }
+
+            .nav-link {
+                justify-content: flex-start;
+                padding-inline: 15px;
+            }
+
+            .nav-link-primary {
+                justify-content: center;
+            }
+
+            .hero {
+                min-height: auto;
+            }
+
+            .hero-overlay {
+                background:
+                    linear-gradient(90deg, rgba(246, 243, 235, .94), rgba(246, 243, 235, .78)),
+                    linear-gradient(0deg, rgba(246, 243, 235, .72), rgba(246, 243, 235, .2));
+            }
+
+            .hero-content {
+                grid-template-columns: 1fr;
+                gap: 36px;
+                padding-top: 70px;
+                padding-bottom: 82px;
+            }
+
+            .hero-copy {
+                text-align: center;
+            }
+
+            .hero-kicker {
+                margin-bottom: 18px;
+            }
+
+            .hero-title {
+                font-size: clamp(45px, 12vw, 66px);
+            }
+
+            .hero-subtitle {
+                margin-inline: auto;
+                font-size: 17px;
+            }
+
+            .hero-actions {
+                justify-content: center;
+            }
+
+            .hero-visual {
+                min-height: 360px;
+            }
+
+            .portrait-frame {
+                width: min(72vw, 285px);
+            }
+
+            .portrait-caption {
+                right: max(0px, calc((100% - 310px) / 2));
+            }
+
+            .quick-facts-wrap {
+                margin-top: -35px;
+            }
+
+            .quick-facts {
+                grid-template-columns: 1fr;
+            }
+
+            .fact {
+                min-height: 82px;
+                justify-content: flex-start;
+                padding-inline: 25px;
+            }
+
+            .fact + .fact {
+                border-top: 1px solid var(--line);
+                border-left: 0;
+            }
+
+            .fact-icon {
+                width: 42px;
+                height: 42px;
+            }
+
+            .section {
+                padding: 82px 0;
+            }
+
+            .section-heading {
+                margin-bottom: 36px;
+            }
+
+            .about-section {
+                padding-top: 85px;
+            }
+
+            .about-grid {
+                grid-template-columns: 1fr;
+                gap: 45px;
+            }
+
+            .about-art {
+                min-height: 390px;
+                max-width: 480px;
+                width: 100%;
+                margin-inline: auto;
+            }
+
+            .about-art-card {
+                right: 28px;
+                bottom: 20px;
+            }
+
+            .about-copy {
+                text-align: center;
+            }
+
+            .about-details {
+                text-align: left;
+            }
+
+            .interest-grid {
+                grid-template-columns: 1fr;
+                gap: 14px;
+            }
+
+            .interest-card {
+                min-height: 230px;
+            }
+
+            .creator-card {
+                grid-template-columns: 1fr;
+                gap: 35px;
+                padding: 35px 27px;
+                text-align: center;
+            }
+
+            .creator-copy p {
+                margin-inline: auto;
+            }
+
+            .channel-art img {
+                width: min(62vw, 210px);
+            }
+
+            .approach-section,
+            .blog-section,
+            .social-section {
+                padding-top: 15px;
+            }
+
+            .approach-grid {
+                grid-template-columns: 1fr;
+                gap: 13px;
+            }
+
+            .blog-feature {
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 30px 25px;
+            }
+
+            .blog-feature .button {
+                width: 100%;
+            }
+
+            .social-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 11px;
+            }
+
+            .social-card {
+                min-height: 100px;
+                gap: 10px;
+                padding: 14px;
+            }
+
+            .social-icon {
+                width: 41px;
+                height: 41px;
+                border-radius: 13px;
+            }
+
+            .social-name {
+                font-size: 15px;
+            }
+
+            .social-handle {
+                font-size: 11px;
+            }
+
+            .footer-top {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .footer-right {
+                align-items: flex-start;
+            }
+
+            .footer-nav {
+                justify-content: flex-start;
+            }
+
+            .footer-bottom {
+                align-items: flex-start;
+                flex-direction: column;
+                gap: 12px;
+            }
+        }
+
+        /* =========================================================
+           18. RESPONSIVE — SMALL MOBILE
+        ========================================================= */
+        @media (max-width: 420px) {
+            body {
+                font-size: 16px;
+            }
+
+            .container {
+                width: calc(100% - 30px);
+            }
+
+            .brand-name {
+                max-width: 160px;
+                font-size: 16px;
+            }
+
+            .hero-title {
+                font-size: 43px;
+            }
+
+            .hero-actions {
+                flex-direction: column;
+            }
+
+            .hero-actions .button {
+                width: 100%;
+            }
+
+            .hero-visual {
+                min-height: 320px;
+            }
+
+            .portrait-frame {
+                width: 245px;
+            }
+
+            .portrait-caption {
+                right: 0;
+                bottom: 20px;
+            }
+
+            .about-art {
+                min-height: 330px;
+            }
+
+            .about-art-note {
+                width: 165px;
+                padding: 16px;
+            }
+
+            .about-art-note strong {
+                font-size: 27px;
+            }
+
+            .about-details {
+                grid-template-columns: 1fr;
+            }
+
+            .interest-card {
+                padding: 25px;
+            }
+
+            .creator-card {
+                padding: 31px 21px;
+            }
+
+            .social-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .social-card {
+                min-height: 82px;
+                padding: 14px 17px;
+            }
+
+            .back-to-top {
+                right: 15px;
+                bottom: 15px;
+                width: 44px;
+                height: 44px;
+            }
+        }
+
+        /* =========================================================
+           19. REDUCED MOTION
+        ========================================================= */
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                scroll-behavior: auto !important;
+                animation-duration: .01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: .01ms !important;
+            }
+
+            .reveal {
+                opacity: 1;
+                transform: none;
+            }
         }
     </style>
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Junaed Islam Somrat",
+        "url": "https://junaedsomrat.github.io/",
+        "image": "https://junaedsomrat.github.io/images/profile.jpg",
+        "description": "বাংলাদেশের একজন শিক্ষার্থী, লেখালেখি ও ফটোগ্রাফিতে আগ্রহী এবং রহস্যময় বিষয় নিয়ে স্টোরিটেলিং কনটেন্ট নির্মাতা।",
+        "sameAs": [
+            "https://m.youtube.com/@Khetrofol",
+            "https://m.facebook.com/KhetrofolBangla",
+            "https://m.instagram.com/KhetrofolBangla",
+            "https://x.com/KhetrofolBangla",
+            "https://tiktok.com/@Khetrofol"
+        ]
+    }
+    </script>
 </head>
-<body class="flex flex-col min-h-screen">
 
-    <!-- Profile and Header Hero Area -->
-    <main class="flex-grow">
-        <section class="flex flex-col items-center justify-center pt-16 pb-10 text-center px-4">
-            <!-- Profile Image (IMAGE 1) -->
-            <div class="w-48 h-48 rounded-full overflow-hidden border-0 shadow-lg mb-6 bg-[#000000] flex items-center justify-center">
-                <img src="https://raw.githubusercontent.com/junaedsomrat/junaedsomrat.github.io/refs/heads/main/assets/image_1.png" alt="Junaed Somrat" class="w-full h-full object-cover">
-            </div>
+<body>
+    <!-- =========================================================
+         HEADER
+    ========================================================== -->
+    <header class="site-header">
+        <div class="nav-inner">
+            <a class="brand" href="/" aria-label="Junaed Islam Somrat — Home">
+                <img class="brand-logo" src="/assets/nav.png" alt="Junaed logo">
+                <span class="brand-name">Junaed Islam Somrat</span>
+            </a>
 
-            <!-- Profile Info -->
-            <h1 class="text-4xl font-extrabold tracking-tight text-black mb-1">
-                Junaed Somrat
-            </h1>
-            <p class="text-base text-gray-700 font-medium">
-                Content Creator <span class="text-gray-400 mx-1">|</span> Vocalist
-            </p>
-        </section>
+            <button
+                class="menu-toggle"
+                id="menuToggle"
+                type="button"
+                aria-label="মেনু খুলুন"
+                aria-expanded="false"
+                aria-controls="primaryNavigation"
+            >
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+                    <path d="M4 7h16M4 12h16M4 17h16"/>
+                </svg>
+            </button>
 
-        <!-- Endless Auto-Scrolling Carousel of Showcase Images (IMAGE 2, 3, 4, 5) -->
-        <section class="w-full py-8 overflow-hidden">
-            <div class="marquee-container">
-                <div class="marquee-track space-x-4 pr-4">
-                    <!-- Original Set (1:1 aspect ratio square containers with rounded corners) -->
-                    <div class="w-44 h-44 rounded-[28px] overflow-hidden flex-shrink-0 bg-neutral-900 shadow-md">
-                        <img src="https://junaedsomrat.github.io/assets/image_02.png" alt="Showcase 2" class="w-full h-full object-cover">
-                    </div>
-                    <div class="w-44 h-44 rounded-[28px] overflow-hidden flex-shrink-0 bg-neutral-900 shadow-md">
-                        <img src="https://junaedsomrat.github.io/assets/image_03.png" alt="Showcase 3" class="w-full h-full object-cover">
-                    </div>
-                    <div class="w-44 h-44 rounded-[28px] overflow-hidden flex-shrink-0 bg-neutral-900 shadow-md">
-                        <img src="https://junaedsomrat.github.io/assets/image_04.png" alt="Showcase 4" class="w-full h-full object-cover">
-                    </div>
-                    <div class="w-44 h-44 rounded-[28px] overflow-hidden flex-shrink-0 bg-neutral-900 shadow-md">
-                        <img src="https://junaedsomrat.github.io/assets/image_05.png" alt="Showcase 5" class="w-full h-full object-cover">
+            <nav class="nav-links" id="primaryNavigation" aria-label="প্রধান নেভিগেশন">
+                <a class="nav-link" href="#about">আমার সম্পর্কে</a>
+                <a class="nav-link" href="#interests">আগ্রহ ও কাজ</a>
+                <a class="nav-link" href="#khetrofol">Khetrofol</a>
+                <a class="nav-link nav-link-primary" href="https://junaedsomrat.github.io/blog">
+                    ব্লগ ও নিবন্ধসমূহ
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="16" height="16" aria-hidden="true">
+                        <path d="M5 12h14M13 6l6 6-6 6"/>
+                    </svg>
+                </a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <!-- =====================================================
+             HERO SECTION
+        ====================================================== -->
+        <section class="hero" id="home">
+            <div class="hero-background" aria-hidden="true"></div>
+            <div class="hero-overlay" aria-hidden="true"></div>
+            <div class="hero-grain" aria-hidden="true"></div>
+
+            <div class="container hero-content">
+                <div class="hero-copy reveal">
+                    <div class="hero-kicker">
+                        <span class="status-dot"></span>
+                        ব্যক্তিগত ওয়েবসাইট
                     </div>
 
-                    <!-- Duplicated Set for infinite continuous wrap effect -->
-                    <div class="w-44 h-44 rounded-[28px] overflow-hidden flex-shrink-0 bg-neutral-900 shadow-md">
-                        <img src="https://junaedsomrat.github.io/assets/image_02.png" alt="Showcase 2 Duplicate" class="w-full h-full object-cover">
+                    <h1 class="hero-title">
+                        জুনায়েদ ইসলাম
+                        <span>সম্রাট</span>
+                    </h1>
+
+                    <p class="hero-subtitle">
+                        নতুন কিছু দেখা, অজানাকে জানা, মুহূর্তকে ছবিতে ধরে রাখা
+                        আর গল্পের ভেতর দিয়ে মানুষের কাছে তথ্য পৌঁছে দেওয়াই
+                        আমার ভালো লাগার জায়গা।
+                    </p>
+
+                    <div class="hero-actions">
+                        <a class="button button-dark" href="#about">
+                            আমার সম্পর্কে জানুন
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <path d="M12 5v14M6 13l6 6 6-6"/>
+                            </svg>
+                        </a>
+
+                        <a class="button button-light" href="https://junaedsomrat.github.io/blog">
+                            ব্লগ ও নিবন্ধসমূহ
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <path d="M5 12h14M13 6l6 6-6 6"/>
+                            </svg>
+                        </a>
                     </div>
-                    <div class="w-44 h-44 rounded-[28px] overflow-hidden flex-shrink-0 bg-neutral-900 shadow-md">
-                        <img src="https://junaedsomrat.github.io/assets/image_03.png" alt="Showcase 3 Duplicate" class="w-full h-full object-cover">
+                </div>
+
+                <div class="hero-visual reveal reveal-delay-2">
+                    <div class="portrait-frame">
+                        <img
+                            class="portrait-image"
+                            src="https://junaedsomrat.github.io/images/profile.jpg"
+                            alt="Junaed Islam Somrat"
+                            fetchpriority="high"
+                        >
                     </div>
-                    <div class="w-44 h-44 rounded-[28px] overflow-hidden flex-shrink-0 bg-neutral-900 shadow-md">
-                        <img src="https://junaedsomrat.github.io/assets/image_04.png" alt="Showcase 4 Duplicate" class="w-full h-full object-cover">
-                    </div>
-                    <div class="w-44 h-44 rounded-[28px] overflow-hidden flex-shrink-0 bg-neutral-900 shadow-md">
-                        <img src="https://junaedsomrat.github.io/assets/image_05.png" alt="Showcase 5 Duplicate" class="w-full h-full object-cover">
+
+                    <div class="portrait-caption">
+                        <div class="caption-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <path d="M12 3v18M3 12h18"/>
+                                <circle cx="12" cy="12" r="8"/>
+                            </svg>
+                        </div>
+                        <div class="caption-text">
+                            <strong>জানার আগ্রহ</strong>
+                            <span>শেখা, সৃষ্টি ও অনুসন্ধান</span>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Blogs Section -->
-        <section class="max-w-xl mx-auto px-4 pt-10 pb-16">
-            <!-- Blog Title Badge - Sliding in from Left (No Fade) -->
-            <div id="blog-header" class="slide-left mb-8 flex items-center justify-start w-full">
-                <div class="blog-header-badge pl-6 pr-10 py-3 flex items-center space-x-3 text-white shadow-md">
-                    <!-- Icon placeholder in white background matching Screenshot 2 design -->
-                    <div class="w-8 h-8 rounded bg-white flex items-center justify-center p-1.5 shadow-inner">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="#1a1a1a" class="w-5 h-5">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 7.5h1.5m-1.5 3h1.5m-7.5 3h7.5m-7.5 3h7.5m3-9h3.375c.621 0 1.125.504 1.125 1.125V18a2.25 2.25 0 0 1-2.25 2.25M16.5 7.5V18a2.25 2.25 0 0 0 2.25 2.25M16.5 7.5V4.875c0-.621-.504-1.125-1.125-1.125H4.125C3.504 3.75 3 4.254 3 4.875V18a2.25 2.25 0 0 0 2.25 2.25h13.5M6 7.5h3v3H6v-3Z" />
+        <!-- =====================================================
+             QUICK FACTS
+        ====================================================== -->
+        <div class="container quick-facts-wrap">
+            <div class="quick-facts reveal">
+                <div class="fact">
+                    <div class="fact-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <path d="M12 8v4l3 2"/>
+                            <circle cx="12" cy="12" r="9"/>
                         </svg>
                     </div>
-                    <span class="text-xl font-bold tracking-wider">BLOGS</span>
+                    <div class="fact-copy">
+                        <strong id="ageValue">—</strong>
+                        <span>বয়স</span>
+                    </div>
+                </div>
+
+                <div class="fact">
+                    <div class="fact-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <path d="M12 21s7-4.4 7-11a7 7 0 1 0-14 0c0 6.6 7 11 7 11Z"/>
+                            <circle cx="12" cy="10" r="2.3"/>
+                        </svg>
+                    </div>
+                    <div class="fact-copy">
+                        <strong>বাংলাদেশ</strong>
+                        <span>নিজের দেশ</span>
+                    </div>
+                </div>
+
+                <div class="fact">
+                    <div class="fact-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+                            <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2Z"/>
+                            <path d="M8 7h8M8 11h6"/>
+                        </svg>
+                    </div>
+                    <div class="fact-copy">
+                        <strong>লেখালেখি</strong>
+                        <span>ভাবনা থেকে শব্দে</span>
+                    </div>
                 </div>
             </div>
+        </div>
 
-            <!-- Blog Post Listings (5 Blogs total loaded, fade-in animation) -->
-            <div class="space-y-6">
-                <!-- Blog 1 -->
-                <article class="reveal blog-card">
-                    <a href="/#" class="block group">
-                        <div class="blog-thumbnail-wrapper">
-                            <img src="https://junaedsomrat.github.io/assets/blog_1.png" alt="How reading can help you" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
-                        </div>
-                        <div class="p-5 border-t border-gray-100">
-                            <h3 class="text-lg font-bold text-gray-900 group-hover:text-neutral-700 transition-colors mb-1">
-                                How reading can help you
-                            </h3>
-                            <span class="text-sm font-medium text-gray-500 inline-flex items-center">
-                                &gt; Read more
-                            </span>
-                        </div>
-                    </a>
-                </article>
+        <!-- =====================================================
+             ABOUT SECTION
+        ====================================================== -->
+        <section class="section about-section" id="about">
+            <div class="container about-grid">
+                <div class="about-art reveal">
+                    <div class="about-art-card">
+                        <img
+                            src="https://junaedsomrat.github.io/images/profile.jpg"
+                            alt="Junaed Islam Somrat-এর ছবি"
+                            loading="lazy"
+                        >
+                    </div>
+                    <div class="about-art-note">
+                        <strong id="aboutAge">—</strong>
+                        <span>বছরের পথচলা</span>
+                    </div>
+                </div>
 
-                <!-- Blog 2 -->
-                <article class="reveal blog-card">
-                    <a href="/#" class="block group">
-                        <div class="blog-thumbnail-wrapper">
-                            <img src="https://junaedsomrat.github.io/assets/blog_2.png" alt="Top 5 AI Tools in the Market" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
-                        </div>
-                        <div class="p-5 border-t border-gray-100">
-                            <h3 class="text-lg font-bold text-gray-900 group-hover:text-neutral-700 transition-colors mb-1">
-                                Top 5 AI Tools in the Market
-                            </h3>
-                            <span class="text-sm font-medium text-gray-500 inline-flex items-center">
-                                &gt; Read more
-                            </span>
-                        </div>
-                    </a>
-                </article>
+                <div class="about-copy reveal reveal-delay-1">
+                    <div class="eyebrow">একটু পরিচয়</div>
+                    <h2>আমি <span class="accent-text">জুনায়েদ</span>।</h2>
 
-                <!-- Blog 3 -->
-                <article class="reveal blog-card">
-                    <a href="/#" class="block group">
-                        <div class="blog-thumbnail-wrapper">
-                            <img src="https://junaedsomrat.github.io/assets/blog_3.png" alt="The Power of Consistency" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
-                        </div>
-                        <div class="p-5 border-t border-gray-100">
-                            <h3 class="text-lg font-bold text-gray-900 group-hover:text-neutral-700 transition-colors mb-1">
-                                The Power of Consistency
-                            </h3>
-                            <span class="text-sm font-medium text-gray-500 inline-flex items-center">
-                                &gt; Read more
-                            </span>
-                        </div>
-                    </a>
-                </article>
+                    <p>
+                        আমি জুনায়েদ ইসলাম সম্রাট। আমি একজন শিক্ষার্থী এবং
+                        সৃজনশীল কাজের প্রতি আগ্রহী মানুষ। চারপাশের সাধারণ
+                        বিষয়গুলোর মধ্যেও নতুন কিছু খুঁজে দেখতে ভালো লাগে।
+                    </p>
 
-                <!-- Blog 4 -->
-                <article class="reveal blog-card">
-                    <a href="/#" class="block group">
-                        <div class="blog-thumbnail-wrapper flex items-center justify-center bg-zinc-950">
-                            <!-- Premium Fallback / Default Blog Image placeholder matching styles -->
-                            <img src="https://junaedsomrat.github.io/assets/blog_2.png" alt="Mastering Public Speaking" class="w-full h-full object-cover opacity-60 transition-transform duration-500 group-hover:scale-105">
-                            <div class="absolute inset-0 bg-black/40 flex items-center justify-center">
-                                <span class="text-white/90 text-sm font-bold tracking-widest px-4 py-2 border border-white/20 rounded">ARTICLE 04</span>
-                            </div>
-                        </div>
-                        <div class="p-5 border-t border-gray-100">
-                            <h3 class="text-lg font-bold text-gray-900 group-hover:text-neutral-700 transition-colors mb-1">
-                                Mastering Public Speaking
-                            </h3>
-                            <span class="text-sm font-medium text-gray-500 inline-flex items-center">
-                                &gt; Read more
-                            </span>
-                        </div>
-                    </a>
-                </article>
+                    <p>
+                        ফটোগ্রাফি ও লেখালেখি আমার পছন্দের কাজ। পাশাপাশি
+                        কনটেন্ট ক্রিয়েটর হিসেবে অজানা, অদ্ভুত ও রহস্যময়
+                        বিষয় নিয়ে ভয়েস-ওভারভিত্তিক কনটেন্ট তৈরি করি।
+                        তথ্যকে সহজভাবে এবং আকর্ষণীয় গল্পের মাধ্যমে
+                        উপস্থাপন করার চেষ্টা করি।
+                    </p>
 
-                <!-- Blog 5 -->
-                <article class="reveal blog-card">
-                    <a href="/#" class="block group">
-                        <div class="blog-thumbnail-wrapper flex items-center justify-center bg-zinc-950">
-                            <!-- Premium Fallback / Default Blog Image placeholder matching styles -->
-                            <img src="https://junaedsomrat.github.io/assets/blog_1.png" alt="Finding Creative Inspiration" class="w-full h-full object-cover opacity-60 transition-transform duration-500 group-hover:scale-105">
-                            <div class="absolute inset-0 bg-black/40 flex items-center justify-center">
-                                <span class="text-white/90 text-sm font-bold tracking-widest px-4 py-2 border border-white/20 rounded">ARTICLE 05</span>
-                            </div>
+                    <div class="about-details">
+                        <div class="detail-item">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+                                <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2Z"/>
+                            </svg>
+                            <span>শিক্ষার্থী</span>
                         </div>
-                        <div class="p-5 border-t border-gray-100">
-                            <h3 class="text-lg font-bold text-gray-900 group-hover:text-neutral-700 transition-colors mb-1">
-                                Finding Creative Inspiration
-                            </h3>
-                            <span class="text-sm font-medium text-gray-500 inline-flex items-center">
-                                &gt; Read more
-                            </span>
-                        </div>
-                    </a>
-                </article>
-            </div>
 
-            <!-- Read More Blogs Button -->
-            <div class="reveal mt-12 flex justify-center">
-                <a href="/blogs" class="inline-flex items-center px-8 py-3.5 border border-black text-black font-semibold text-sm tracking-wide rounded-full hover:bg-black hover:text-white transition-all duration-300 transform active:scale-95 shadow-sm">
-                    Read more blogs
-                </a>
+                        <div class="detail-item">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <path d="M3 7h18v13H3z"/>
+                                <path d="M7 7l2-3h6l2 3"/>
+                                <circle cx="12" cy="13.5" r="3.2"/>
+                            </svg>
+                            <span>ফটোগ্রাফি</span>
+                        </div>
+
+                        <div class="detail-item">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <path d="M4 4h16v16H4z"/>
+                                <path d="M8 8h8M8 12h8M8 16h5"/>
+                            </svg>
+                            <span>লেখালেখি</span>
+                        </div>
+
+                        <div class="detail-item">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <path d="m9 18 6-12"/>
+                                <path d="M5 9v6M19 9v6"/>
+                                <path d="M3 12h2M19 12h2"/>
+                            </svg>
+                            <span>কনটেন্ট ক্রিয়েশন</span>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
 
-        <!-- Social Media Section (As Layout in Screenshot 3) -->
-        <section class="reveal max-w-xl mx-auto px-4 pt-4 pb-20 text-center">
-            <h2 class="text-xl font-extrabold tracking-widest text-black mb-10">
-                MY SOCIAL MEDIA
-            </h2>
-            
-            <!-- Unique offset bubble arrangement matching Screenshot 3 styling -->
-            <div class="relative w-72 h-72 mx-auto flex items-center justify-center mb-6">
-                <!-- Facebook Icon Bubble (Largest, top right) -->
-                <a href="https://m.facebook.com/JunaedSomrat" target="_blank" rel="noopener" class="social-btn w-32 h-32 absolute top-0 right-2 shadow-lg" aria-label="Facebook">
-                    <img src="https://junaedsomrat.github.io/assets/facebook.svg" alt="Facebook" class="w-14 h-14 filter invert" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
-                    <!-- Backup SVG Icon -->
-                    <svg class="hidden w-14 h-14 fill-white" viewBox="0 0 24 24"><path d="M9 8H7v3h2v9h3v-9h2.72l.41-3H12V6.44C12 5.59 12.23 5 13.43 5H15V2h-2.58C10.14 2 8.5 3.32 8.5 5.89V8H7v3h1.5v9h3v-9h2.72l.41-3H12V6.44C12 5.59 12.23 5 13.43 5H15V2h-2.58C10.14 2 8.5 3.32 8.5 5.89V8H9z"/></svg>
-                </a>
+        <!-- =====================================================
+             INTERESTS SECTION
+        ====================================================== -->
+        <section class="section interests-section" id="interests">
+            <div class="container">
+                <div class="section-heading reveal">
+                    <div class="eyebrow">যা করতে ভালোবাসি</div>
+                    <h2 class="section-title">আমার আগ্রহ ও <span class="accent-text">কাজ</span></h2>
+                    <p class="section-description">
+                        কিছু কাজ আছে, যেগুলো শুধু সময় কাটানোর জন্য নয়;
+                        নিজের ভাবনা প্রকাশ করারও একটি মাধ্যম।
+                    </p>
+                </div>
 
-                <!-- Instagram Icon Bubble (Medium, left middle) -->
-                <a href="https://m.instagram.com/Junaed_Somrat" target="_blank" rel="noopener" class="social-btn w-24 h-24 absolute left-0 top-16 shadow-lg" aria-label="Instagram">
-                    <img src="https://junaedsomrat.github.io/assets/instagram.svg" alt="Instagram" class="w-10 h-10 filter invert" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
-                    <!-- Backup SVG Icon -->
-                    <svg class="hidden w-10 h-10 stroke-white fill-none stroke-[1.5]" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
-                </a>
+                <div class="interest-grid">
+                    <article class="interest-card reveal">
+                        <span class="interest-number">01</span>
+                        <div class="interest-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <path d="M3 7h18v13H3z"/>
+                                <path d="M7 7l2-3h6l2 3"/>
+                                <circle cx="12" cy="13.5" r="3.2"/>
+                            </svg>
+                        </div>
+                        <h3>ফটোগ্রাফি</h3>
+                        <p>
+                            চারপাশের দৃশ্য, আলো, ছায়া ও ছোট ছোট মুহূর্তকে
+                            ক্যামেরায় ধরে রাখতে ভালো লাগে।
+                        </p>
+                    </article>
 
-                <!-- YouTube Icon Bubble (Small, bottom middle) -->
-                <a href="https://m.youtube.com/@JunaedSomrat" target="_blank" rel="noopener" class="social-btn w-20 h-20 absolute bottom-0 left-1/3 -ml-4 shadow-lg" aria-label="YouTube">
-                    <img src="https://junaedsomrat.github.io/assets/youtube.svg" alt="YouTube" class="w-9 h-9 filter invert" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
-                    <!-- Backup SVG Icon -->
-                    <svg class="hidden w-9 h-9 fill-white" viewBox="0 0 24 24"><path d="M23.498 6.163a3.003 3.003 0 0 0-2.11-2.11C19.517 3.545 12 3.545 12 3.545s-7.517 0-9.388.507a3.003 3.003 0 0 0-2.11 2.11C0 8.033 0 12 0 12s0 3.967.502 5.837a3.003 3.003 0 0 0 2.11 2.11c1.871.507 9.388.507 9.388.507s7.517 0 9.388-.507a3.003 3.003 0 0 0 2.11-2.11C24 15.967 24 12 24 12s0-3.967-.502-5.837zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
-                </a>
+                    <article class="interest-card reveal reveal-delay-1">
+                        <span class="interest-number">02</span>
+                        <div class="interest-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <path d="M4 4h16v16H4z"/>
+                                <path d="M8 8h8M8 12h8M8 16h5"/>
+                            </svg>
+                        </div>
+                        <h3>লেখালেখি</h3>
+                        <p>
+                            নিজের ভাবনা, পর্যবেক্ষণ ও অভিজ্ঞতাকে
+                            শব্দের মাধ্যমে সাজিয়ে প্রকাশ করতে পছন্দ করি।
+                        </p>
+                    </article>
+
+                    <article class="interest-card reveal reveal-delay-2">
+                        <span class="interest-number">03</span>
+                        <div class="interest-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <path d="M12 3a9 9 0 1 0 9 9"/>
+                                <path d="M12 7v5l3 2"/>
+                                <path d="M16 3h5v5"/>
+                                <path d="m21 3-6 6"/>
+                            </svg>
+                        </div>
+                        <h3>রহস্য অনুসন্ধান</h3>
+                        <p>
+                            পৃথিবীর অজানা ঘটনা, অদ্ভুত তথ্য, বিজ্ঞান ও
+                            রহস্যময় বিষয় সম্পর্কে জানতে আগ্রহী।
+                        </p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- =====================================================
+             KHETROFOL CREATOR SECTION
+        ====================================================== -->
+        <section class="section creator-section" id="khetrofol">
+            <div class="container">
+                <div class="creator-card reveal">
+                    <div class="creator-copy">
+                        <div class="creator-kicker">
+                            <span></span>
+                            CONTENT CREATION
+                        </div>
+
+                        <h2>অজানাকে জানার গল্প — <span class="accent-text">Khetrofol</span></h2>
+
+                        <p>
+                            কনটেন্ট ক্রিয়েটর হিসেবে আমি বিভিন্ন অজানা,
+                            রহস্যময় ও কৌতূহলোদ্দীপক বিষয় নিয়ে ভয়েস-ওভার
+                            কনটেন্ট তৈরি করি। তথ্য, গবেষণা ও গল্প বলার
+                            সমন্বয়ে বিষয়গুলো দর্শকদের সামনে তুলে ধরার
+                            চেষ্টা করি। আমার এই কাজগুলো প্রকাশিত হয়
+                            Khetrofol ইউটিউব চ্যানেলে।
+                        </p>
+
+                        <a
+                            class="creator-button"
+                            href="https://m.youtube.com/@Khetrofol"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+                            Khetrofol চ্যানেল দেখুন
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <path d="M7 17 17 7M7 7h10v10"/>
+                            </svg>
+                        </a>
+                    </div>
+
+                    <a
+                        class="channel-art"
+                        href="https://m.youtube.com/@Khetrofol"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label="Khetrofol YouTube channel"
+                    >
+                        <img
+                            src="https://junaedsomrat.github.io/images/khetrofol_floating.png"
+                            alt="Khetrofol channel symbol"
+                            loading="lazy"
+                        >
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- =====================================================
+             WORK APPROACH
+        ====================================================== -->
+        <section class="section approach-section">
+            <div class="container">
+                <div class="section-heading reveal">
+                    <div class="eyebrow">আমার কাজের ধরন</div>
+                    <h2 class="section-title">ভাবনা থেকে <span class="accent-text">সৃষ্টি</span></h2>
+                    <p class="section-description">
+                        আগ্রহের বিষয়গুলোকে নিজের মতো করে জানি,
+                        বুঝি এবং সবার সঙ্গে ভাগ করে নেওয়ার চেষ্টা করি।
+                    </p>
+                </div>
+
+                <div class="approach-grid">
+                    <article class="approach-card reveal">
+                        <div class="approach-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <circle cx="11" cy="11" r="7"/>
+                                <path d="m20 20-4-4"/>
+                                <path d="M11 8v6M8 11h6"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <h3>অনুসন্ধান ও শেখা</h3>
+                            <p>
+                                নতুন বিষয় সম্পর্কে জানা, বিভিন্ন তথ্য
+                                পর্যবেক্ষণ করা এবং নিজের জ্ঞান বাড়ানো।
+                            </p>
+                        </div>
+                    </article>
+
+                    <article class="approach-card reveal reveal-delay-1">
+                        <div class="approach-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <path d="M12 20h9"/>
+                                <path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L8 18l-4 1 1-4Z"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <h3>লেখা ও পরিকল্পনা</h3>
+                            <p>
+                                ভাবনাকে গুছিয়ে লেখা, বিষয়বস্তু সাজানো
+                                এবং উপস্থাপনার পরিকল্পনা করা।
+                            </p>
+                        </div>
+                    </article>
+
+                    <article class="approach-card reveal">
+                        <div class="approach-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <rect x="3" y="7" width="18" height="13" rx="2"/>
+                                <path d="m10 11 5 2.5-5 2.5z"/>
+                                <path d="M7 4h10"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <h3>কনটেন্ট তৈরি</h3>
+                            <p>
+                                ভয়েস-ওভার ও সম্পাদনার মাধ্যমে তথ্যকে
+                                দর্শকের জন্য সহজবোধ্য করে তোলা।
+                            </p>
+                        </div>
+                    </article>
+
+                    <article class="approach-card reveal reveal-delay-1">
+                        <div class="approach-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <path d="M4 19V5"/>
+                                <path d="M4 19h16"/>
+                                <path d="m7 15 4-4 3 2 5-6"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <h3>উন্নতি ও নতুন চেষ্টা</h3>
+                            <p>
+                                প্রতিটি কাজ থেকে শেখা এবং পরবর্তী
+                                কাজকে আরও ভালো করার চেষ্টা করা।
+                            </p>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- =====================================================
+             BLOG FEATURE
+        ====================================================== -->
+        <section class="section blog-section" id="blog">
+            <div class="container">
+                <div class="blog-feature reveal">
+                    <div class="blog-feature-copy">
+                        <div class="eyebrow">READ MY WRITINGS</div>
+                        <h2>ভাবনা ও লেখাগুলো পড়তে চাও?</h2>
+                        <p>
+                            আমার লেখা বিভিন্ন ব্লগ পোস্ট ও নিবন্ধ এক জায়গায়
+                            পড়তে ঘুরে আসতে পারো ব্লগ পেজ থেকে।
+                        </p>
+                    </div>
+
+                    <a class="button button-dark" href="https://junaedsomrat.github.io/blog">
+                        ব্লগ ও নিবন্ধসমূহ
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <path d="M5 12h14M13 6l6 6-6 6"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- =====================================================
+             SOCIAL MEDIA
+        ====================================================== -->
+        <section class="section social-section" id="social">
+            <div class="container">
+                <div class="section-heading reveal">
+                    <div class="eyebrow">LET'S CONNECT</div>
+                    <h2 class="section-title">সোশ্যাল <span class="accent-text">মিডিয়া</span></h2>
+                    <p class="section-description">
+                        Khetrofol-এর নতুন কনটেন্ট ও আপডেট পেতে
+                        আমার সোশ্যাল প্ল্যাটফর্মগুলোতে যুক্ত থাকতে পারো।
+                    </p>
+                </div>
+
+                <div class="social-grid">
+                    <a
+                        class="social-card reveal"
+                        href="https://m.facebook.com/KhetrofolBangla"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        <span class="social-icon">
+                            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                                <path d="M13.4 21v-8h2.7l.4-3.1h-3.1v-2c0-.9.3-1.5 1.6-1.5h1.7V3.6c-.3 0-1.3-.1-2.4-.1-2.4 0-4.1 1.5-4.1 4.2v2.3H7.5V13h2.7v8h3.2Z"/>
+                            </svg>
+                        </span>
+                        <span>
+                            <span class="social-name">Facebook</span>
+                            <span class="social-handle">KhetrofolBangla</span>
+                        </span>
+                    </a>
+
+                    <a
+                        class="social-card reveal reveal-delay-1"
+                        href="https://m.instagram.com/KhetrofolBangla"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        <span class="social-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <rect x="3" y="3" width="18" height="18" rx="5"/>
+                                <circle cx="12" cy="12" r="4"/>
+                                <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/>
+                            </svg>
+                        </span>
+                        <span>
+                            <span class="social-name">Instagram</span>
+                            <span class="social-handle">KhetrofolBangla</span>
+                        </span>
+                    </a>
+
+                    <a
+                        class="social-card reveal reveal-delay-2"
+                        href="https://x.com/KhetrofolBangla"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        <span class="social-icon">
+                            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                                <path d="M18.9 2H22l-6.8 7.8L23.2 22h-6.3L12 14.6 5.6 22H2.4l7.3-8.4L1.9 2h6.5l4.5 6.8L18.9 2Zm-1.1 18h1.7L7.4 3.9H5.6L17.8 20Z"/>
+                            </svg>
+                        </span>
+                        <span>
+                            <span class="social-name">X / Twitter</span>
+                            <span class="social-handle">@KhetrofolBangla</span>
+                        </span>
+                    </a>
+
+                    <a
+                        class="social-card reveal reveal-delay-3"
+                        href="https://tiktok.com/@Khetrofol"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        <span class="social-icon">
+                            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                                <path d="M19.6 7.1a6.4 6.4 0 0 1-4.1-1.5v8.1a5.7 5.7 0 1 1-5.7-5.7c.4 0 .8 0 1.2.1v3.1a2.7 2.7 0 1 0 1.6 2.5V2.5h3a6.3 6.3 0 0 0 4 4v.6Z"/>
+                            </svg>
+                        </span>
+                        <span>
+                            <span class="social-name">TikTok</span>
+                            <span class="social-handle">@Khetrofol</span>
+                        </span>
+                    </a>
+                </div>
             </div>
         </section>
     </main>
 
-    <!-- Footer Area (Design matching footer layout of Screenshot 3) -->
-    <footer class="bg-[#f0f0f0] border-t border-gray-200 py-12 px-6 w-full">
-        <div class="max-w-xl mx-auto flex flex-col items-start justify-center">
-            <!-- Footer Favicon & Branding Logo Wrapper -->
-            <div class="flex items-center space-x-3 mb-3">
-                <img src="https://junaedsomrat.github.io/assets/favicon_footer.png" alt="Footer Logo" class="w-8 h-8 object-contain" onerror="this.src='https://junaedsomrat.github.io/assets/favicon.png'">
-                <span class="text-xl font-bold tracking-tight text-black">Junaed Somrat</span>
+    <!-- =========================================================
+         FOOTER
+    ========================================================== -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-top">
+                <div>
+                    <a class="footer-brand" href="/">
+                        <img src="/assets/nav.png" alt="">
+                        <strong>Junaed Islam Somrat</strong>
+                    </a>
+
+                    <p class="footer-about">
+                        এটি আমার ব্যক্তিগত ওয়েবসাইট। এখানে আমার পরিচয়,
+                        আগ্রহ, সৃজনশীল কাজ এবং লেখালেখি সম্পর্কে
+                        প্রয়োজনীয় তথ্য তুলে ধরা হয়েছে।
+                    </p>
+                </div>
+
+                <div class="footer-right">
+                    <h2 class="footer-heading">এক্সপ্লোর</h2>
+                    <nav class="footer-nav" aria-label="ফুটার নেভিগেশন">
+                        <a href="/">হোম</a>
+                        <a href="#about">আমার সম্পর্কে</a>
+                        <a href="https://junaedsomrat.github.io/blog">ব্লগ ও নিবন্ধসমূহ</a>
+                        <a href="https://m.youtube.com/@Khetrofol" target="_blank" rel="noopener noreferrer">Khetrofol</a>
+                        <a href="/about/">About</a>
+                        <a href="/contact/">Contact</a>
+                        <a href="/privacy/">Privacy</a>
+                        <a href="/sitemap.xml">Sitemap</a>
+                    </nav>
+                </div>
             </div>
-            
-            <!-- Copyright Dynamic Statement (Automatic year generator) -->
-            <p class="text-xs text-gray-500 font-medium">
-                &copy; <span id="current-year">2026</span>, Junaed Somrat all rights reserved
-            </p>
+
+            <div class="footer-bottom">
+                <p class="copyright">
+                    © <span id="currentYear"></span> Junaed Islam Somrat. All rights reserved.
+                </p>
+
+                <div class="powered">
+                    <span>Powered by</span>
+                    <img src="/assets/footer.png" alt="Powered by">
+                </div>
+            </div>
         </div>
     </footer>
 
-    <!-- JavaScript for Animations and Copyright Year Updating -->
+    <!-- Back to top -->
+    <button class="back-to-top" id="backToTop" type="button" aria-label="উপরে ফিরে যান">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="m6 14 6-6 6 6"/>
+        </svg>
+    </button>
+
     <script>
-        // Automatic Year Updater
-        document.addEventListener("DOMContentLoaded", function() {
-            const currentYear = new Date().getFullYear();
-            const yearElement = document.getElementById("current-year");
-            if (yearElement) {
-                yearElement.textContent = currentYear;
-            }
+        "use strict";
 
-            // Scroll animations handler
-            const reveals = document.querySelectorAll('.reveal');
-            const blogHeader = document.getElementById('blog-header');
-
-            function handleScrollAnimations() {
-                const windowHeight = window.innerHeight;
-
-                // Animate individual components
-                reveals.forEach(reveal => {
-                    const elementTop = reveal.getBoundingClientRect().top;
-                    const elementVisible = 100; // Trigger threshold in px
-                    if (elementTop < windowHeight - elementVisible) {
-                        reveal.classList.add('active');
-                    }
-                });
-
-                // Blog Badge left animation handler (without fade)
-                if (blogHeader) {
-                    const headerTop = blogHeader.getBoundingClientRect().top;
-                    if (headerTop < windowHeight - 50) {
-                        blogHeader.classList.add('active');
-                    }
-                }
-            }
-
-            // Attach scroll event and trigger immediately on load
-            window.addEventListener('scroll', handleScrollAnimations);
-            handleScrollAnimations(); // Trigger initial execution for elements already on screen
+        /* =========================================================
+           01. PERSONAL DATA
+           জন্মতারিখ শুধু JavaScript-এ রাখা হয়েছে।
+           এটি HTML-এর দৃশ্যমান অংশে দেখানো হয় না।
+        ========================================================= */
+        const PERSONAL_DATA = Object.freeze({
+            birthDate: "2010-08-09"
         });
+
+        /* =========================================================
+           02. AGE CALCULATOR
+           জন্মদিন পার হয়েছে কি না সেটিও হিসাব করা হয়।
+        ========================================================= */
+        function calculateAge(dateString) {
+            const birthDate = new Date(`${dateString}T00:00:00`);
+            const today = new Date();
+
+            if (Number.isNaN(birthDate.getTime()) || birthDate > today) {
+                return null;
+            }
+
+            let age = today.getFullYear() - birthDate.getFullYear();
+
+            const monthDifference = today.getMonth() - birthDate.getMonth();
+            const birthdayNotReached =
+                monthDifference < 0 ||
+                (monthDifference === 0 && today.getDate() < birthDate.getDate());
+
+            if (birthdayNotReached) {
+                age -= 1;
+            }
+
+            return age;
+        }
+
+        function renderAge() {
+            const age = calculateAge(PERSONAL_DATA.birthDate);
+            const ageValue = document.getElementById("ageValue");
+            const aboutAge = document.getElementById("aboutAge");
+
+            if (age === null) {
+                if (ageValue) ageValue.textContent = "—";
+                if (aboutAge) aboutAge.textContent = "—";
+                return;
+            }
+
+            const formattedAge = `${age} বছর`;
+
+            if (ageValue) {
+                ageValue.textContent = formattedAge;
+            }
+
+            if (aboutAge) {
+                aboutAge.textContent = formattedAge;
+            }
+        }
+
+        /* =========================================================
+           03. FOOTER YEAR
+        ========================================================= */
+        function renderCurrentYear() {
+            const yearElement = document.getElementById("currentYear");
+
+            if (yearElement) {
+                yearElement.textContent = new Date().getFullYear();
+            }
+        }
+
+        /* =========================================================
+           04. MOBILE NAVIGATION
+        ========================================================= */
+        function initializeNavigation() {
+            const toggle = document.getElementById("menuToggle");
+            const navigation = document.getElementById("primaryNavigation");
+
+            if (!toggle || !navigation) {
+                return;
+            }
+
+            function closeMenu() {
+                navigation.classList.remove("open");
+                toggle.setAttribute("aria-expanded", "false");
+                toggle.setAttribute("aria-label", "মেনু খুলুন");
+            }
+
+            toggle.addEventListener("click", () => {
+                const isOpen = navigation.classList.toggle("open");
+
+                toggle.setAttribute("aria-expanded", String(isOpen));
+                toggle.setAttribute(
+                    "aria-label",
+                    isOpen ? "মেনু বন্ধ করুন" : "মেনু খুলুন"
+                );
+            });
+
+            navigation.querySelectorAll("a").forEach((link) => {
+                link.addEventListener("click", closeMenu);
+            });
+
+            document.addEventListener("click", (event) => {
+                const clickedInsideNavigation =
+                    navigation.contains(event.target) ||
+                    toggle.contains(event.target);
+
+                if (!clickedInsideNavigation) {
+                    closeMenu();
+                }
+            });
+
+            document.addEventListener("keydown", (event) => {
+                if (event.key === "Escape") {
+                    closeMenu();
+                    toggle.focus();
+                }
+            });
+
+            window.addEventListener("resize", () => {
+                if (window.innerWidth > 720) {
+                    closeMenu();
+                }
+            });
+        }
+
+        /* =========================================================
+           05. SCROLL REVEAL
+        ========================================================= */
+        function initializeRevealAnimations() {
+            const revealElements = document.querySelectorAll(".reveal");
+
+            if (!("IntersectionObserver" in window)) {
+                revealElements.forEach((element) => {
+                    element.classList.add("is-visible");
+                });
+                return;
+            }
+
+            const observer = new IntersectionObserver(
+                (entries, currentObserver) => {
+                    entries.forEach((entry) => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add("is-visible");
+                            currentObserver.unobserve(entry.target);
+                        }
+                    });
+                },
+                {
+                    threshold: 0.12,
+                    rootMargin: "0px 0px -35px 0px"
+                }
+            );
+
+            revealElements.forEach((element) => {
+                observer.observe(element);
+            });
+        }
+
+        /* =========================================================
+           06. BACK TO TOP
+        ========================================================= */
+        function initializeBackToTop() {
+            const button = document.getElementById("backToTop");
+
+            if (!button) {
+                return;
+            }
+
+            function updateButtonVisibility() {
+                const shouldShow = window.scrollY > 500;
+                button.classList.toggle("visible", shouldShow);
+            }
+
+            window.addEventListener(
+                "scroll",
+                updateButtonVisibility,
+                { passive: true }
+            );
+
+            button.addEventListener("click", () => {
+                window.scrollTo({
+                    top: 0,
+                    behavior: "smooth"
+                });
+            });
+
+            updateButtonVisibility();
+        }
+
+        /* =========================================================
+           07. IMAGE FALLBACK
+           কোনো ছবি লোড না হলে ভাঙা আইকন দেখানো এড়ানো।
+        ========================================================= */
+        function initializeImageFallbacks() {
+            const images = document.querySelectorAll("img");
+
+            images.forEach((image) => {
+                image.addEventListener("error", () => {
+                    image.classList.add("image-unavailable");
+                    image.setAttribute("data-image-error", "true");
+                }, { once: true });
+            });
+        }
+
+        /* =========================================================
+           08. INITIALIZE
+        ========================================================= */
+        function initializeWebsite() {
+            renderAge();
+            renderCurrentYear();
+            initializeNavigation();
+            initializeRevealAnimations();
+            initializeBackToTop();
+            initializeImageFallbacks();
+        }
+
+        if (document.readyState === "loading") {
+            document.addEventListener("DOMContentLoaded", initializeWebsite, {
+                once: true
+            });
+        } else {
+            initializeWebsite();
+        }
     </script>
 </body>
 </html>
-
