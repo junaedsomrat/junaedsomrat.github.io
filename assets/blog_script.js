@@ -80,3 +80,18 @@ document.addEventListener('DOMContentLoaded', function(){
 
   document.getElementById('year').textContent = new Date().getFullYear(); 
 });
+
+
+// Cloudflare Web Analytics
+if (!document.querySelector('script[src="https://static.cloudflareinsights.com/beacon.min.js"]')) {
+    const cfScript = document.createElement('script');
+
+    cfScript.type = 'module';
+    cfScript.src = 'https://static.cloudflareinsights.com/beacon.min.js';
+    cfScript.setAttribute('data-cf-beacon', JSON.stringify({
+        token: '540a7ffdd5cc446b900995856b82b95d'
+    }));
+
+    document.head.appendChild(cfScript);
+}
+// End Cloudflare Web Analytics
