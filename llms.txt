@@ -4,8 +4,8 @@
 
 ## Blog Posts
 <!-- AUTO_BLOG_LIST -->
-- [Let s start from here](https://junaedsomrat.github.io/blog/Let_s_start_from_here.html)
-- [index](https://junaedsomrat.github.io/blog/index.html)
+- [শুরুটা হোক এখান থেকেই](https://junaedsomrat.github.io/blog/Let_s_start_from_here.html)
+
 ## About
 - Author: Junaed Somrat
 - Site: https://junaedsomrat.github.io
