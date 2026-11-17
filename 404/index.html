@@ -1,116 +1,565 @@
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="bn">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Page Not Found | Junaed Somrat</title>
-    
-    <!-- এসইও এবং ক্রলার নির্দেশনাবলী (৪০৪ পেইজ ইনডেক্স না করার জন্য) -->
-    <meta name="robots" content="noindex, follow">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- ওয়েবসাইট ফেভিকন -->
-    <link rel="icon" type="image/png" href="https://junaedsomrat.github.io/assets/favicon.png">
+<title>404 - Page Not Found | Junaed Somrat</title>
+<meta name="description" content="দুঃখিত! আপনি যে পেজটি খুঁজছেন সেটি পাওয়া যায়নি। Junaed Somrat-এর ওয়েবসাইটে ফিরে যান।">
+<meta name="author" content="Junaed Islam Somrat">
+<meta name="robots" content="noindex, follow">
 
-    <!-- গুগল ফন্ট (Inter) -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<meta property="og:title" content="404 - Page Not Found">
+<meta property="og:description" content="দুঃখিত! পেজটি খুঁজে পাওয়া যায়নি।">
+<meta property="og:image" content="https://junaedsomrat.github.io/assets/nav.png">
+<meta property="og:type" content="website">
 
-    <!-- টেইলউইন্ড সিএসএস ইমপোর্ট -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                    },
-                }
-            }
-        }
-    </script>
+<link rel="icon" href="/favicon.png">
+<link rel="icon" type="image/png" href="/favicon.png">
 
-    <style>
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #ffffff;
-            color: #000000;
-            -webkit-tap-highlight-color: transparent;
-        }
-        /* এন্ট্রি অ্যানিমেশন */
-        .fade-in-up {
-            animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-        }
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-    </style>
+<style>
+@font-face{
+  font-family:'Kalpurush';
+  src:url('/assets/Kalpurush.ttf') format('truetype');
+  font-display:swap;
+}
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+html,body{
+  overflow-x:hidden;
+  max-width:100vw;
+}
+
+body{
+  background:#f6f3eb;
+  color:#1a1a1a;
+  font-family:'Kalpurush',sans-serif;
+  padding-top:72px;
+}
+
+button,a{
+  font-family:'Kalpurush',sans-serif;
+}
+
+/* NAVBAR */
+
+#navbar{
+  width:100%;
+  height:72px;
+  background:#fff;
+  border-bottom:1px solid #ece9e0;
+  display:flex;
+  align-items:center;
+  padding:0 20px;
+  position:fixed;
+  top:0;
+  left:0;
+  z-index:100;
+}
+
+#navbar img{
+  height:50px;
+}
+
+/* NOTICE BAR */
+
+#noticeBar{
+  position:fixed;
+  top:0;
+  right:0;
+  width:100%;
+  height:72px;
+  z-index:200;
+  background:#111;
+  color:#fff;
+  font-size:17px;
+  line-height:1.5;
+  display:flex;
+  align-items:center;
+  padding:0 20px;
+  transform:translateX(105%);
+  transition:transform .4s ease;
+  overflow:hidden;
+}
+
+#noticeBar.show{
+  transform:translateX(0);
+}
+
+#noticeBar.hide{
+  transform:translateX(105%);
+}
+
+#noticeText{
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  flex:1;
+}
+
+#noticeLine{
+  position:absolute;
+  left:0;
+  bottom:0;
+  height:3px;
+  width:100%;
+  background:#fff;
+  transform-origin:left;
+}
+
+#noticeLine.run{
+  animation:noticeLineAnim 5s linear forwards;
+}
+
+@keyframes noticeLineAnim{
+  from{transform:scaleX(1)}
+  to{transform:scaleX(0)}
+}
+
+/* MAIN */
+
+#main{
+  min-height:calc(100vh - 72px);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:60px 20px;
+}
+
+.error-box{
+  width:100%;
+  max-width:600px;
+  text-align:center;
+  background:#fff;
+  border:1px solid #ece7d9;
+  border-radius:5px;
+  padding:55px 30px;
+}
+
+/* 404 */
+
+.error-code{
+  font-size:115px;
+  font-weight:700;
+  line-height:1;
+  letter-spacing:5px;
+  color:#111;
+  position:relative;
+  display:inline-block;
+}
+
+.error-code::after{
+  content:'';
+  display:block;
+  width:65px;
+  height:4px;
+  background:#111;
+  margin:18px auto 0;
+}
+
+.error-label{
+  font-size:13px;
+  letter-spacing:3px;
+  color:#999;
+  margin-top:25px;
+  text-transform:uppercase;
+}
+
+.error-title{
+  font-size:27px;
+  font-weight:700;
+  margin-top:12px;
+  line-height:1.4;
+}
+
+.error-description{
+  font-size:17px;
+  color:#777;
+  line-height:1.8;
+  margin:12px auto 25px;
+  max-width:390px;
+}
+
+/* URL INFO */
+
+.url-box{
+  background:#fcfaf5;
+  border:1px solid #e5ddd0;
+  padding:11px 14px;
+  border-radius:5px;
+  font-size:14px;
+  color:#999;
+  overflow-wrap:anywhere;
+  margin:0 auto 28px;
+  max-width:420px;
+}
+
+.url-box span{
+  color:#555;
+}
+
+/* BUTTONS */
+
+.actions{
+  display:flex;
+  justify-content:center;
+  gap:10px;
+  flex-wrap:wrap;
+}
+
+.btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding:11px 23px;
+  border:1px solid #111;
+  border-radius:5px;
+  font-size:15px;
+  text-decoration:none;
+  transition:.2s;
+}
+
+.btn-primary{
+  background:#111;
+  color:#fff;
+}
+
+.btn-primary:hover{
+  background:#333;
+}
+
+.btn-secondary{
+  background:#fff;
+  color:#111;
+}
+
+.btn-secondary:hover{
+  background:#f5f2eb;
+}
+
+/* FOOTER */
+
+#footer{
+  width:100%;
+  background:#f5f2eb;
+  border-top:1px solid #ece9e0;
+  padding:0;
+}
+
+.footer-inner{
+  max-width:760px;
+  margin:0 auto;
+  padding:36px 15px 28px;
+  display:flex;
+  flex-direction:column;
+  gap:22px;
+}
+
+@media(max-width:768px){
+  .footer-inner{
+    padding-left:45px;
+    padding-right:45px;
+  }
+}
+
+@media(min-width:1100px){
+  .footer-inner{
+    max-width:700px;
+    padding:40px 0 30px;
+  }
+}
+
+.footer-about{
+  font-size:17px;
+  line-height:1.8;
+  color:#444;
+}
+
+.footer-about b{
+  color:#111;
+}
+
+.footer-social{
+  display:flex;
+  gap:14px;
+  align-items:center;
+}
+
+.footer-social a{
+  width:38px;
+  height:38px;
+  background:#fff;
+  border:1px solid #e8e2d2;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:50%;
+}
+
+.footer-social a img{
+  width:38px;
+  height:38px;
+  object-fit:contain;
+}
+
+.footer-links{
+  display:flex;
+  gap:18px;
+  flex-wrap:wrap;
+  font-size:14px;
+  color:#777;
+}
+
+.footer-links a{
+  color:#666;
+  text-decoration:none;
+}
+
+.footer-links a:hover{
+  color:#111;
+}
+
+.footer-bottom{
+  border-top:1px solid #ece9e0;
+  padding-top:18px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:10px;
+  text-align:center;
+}
+
+.footer-bottom .copy{
+  font-size:13px;
+  color:#888;
+}
+
+.footer-bottom .powered{
+  font-size:10px;
+  letter-spacing:2px;
+  color:#aaa;
+  text-transform:uppercase;
+}
+
+.footer-bottom .footer-logo{
+  height:18px;
+}
+
+/* MOBILE */
+
+@media(max-width:480px){
+
+  .error-box{
+    padding:45px 20px;
+  }
+
+  .error-code{
+    font-size:95px;
+  }
+
+  .error-title{
+    font-size:24px;
+  }
+
+  .error-description{
+    font-size:16px;
+  }
+
+  .actions{
+    flex-direction:column;
+  }
+
+  .btn{
+    width:100%;
+  }
+}
+
+@media(max-width:360px){
+  .footer-inner{
+    padding-left:20px;
+    padding-right:20px;
+  }
+}
+
+</style>
 </head>
-<body class="flex flex-col min-h-screen">
 
-    <!-- মূল কন্টেন্ট এরিয়া -->
-    <main class="flex-grow flex flex-col items-center justify-center px-6 py-16 text-center fade-in-up">
-        <!-- লোগো/আইকন এরিয়া -->
-        <div class="mb-8">
-            <a href="/">
-                <img src="https://junaedsomrat.github.io/assets/favicon.png" alt="Junaed Somrat" class="w-16 h-16 mx-auto hover:scale-105 transition-transform duration-300">
-            </a>
-        </div>
+<body>
 
-        <!-- বড় করে ৪০৪ টেক্সট এবং মেসেজ -->
-        <h1 class="text-9xl font-black tracking-tight text-black mb-4">
-            404
-        </h1>
-        <h2 class="text-2xl font-bold text-gray-900 mb-3">
-            Page Not Found
-        </h2>
-        <p class="text-base text-gray-500 max-w-md mx-auto mb-10 leading-relaxed">
-            The page you are looking for might have been removed, had its name changed, or is temporarily unavailable.
-        </p>
+<!-- NAVBAR -->
 
-        <!-- হোম পেইজে ফিরে যাওয়ার বাটন -->
-        <div>
-            <a href="/" class="inline-flex items-center px-8 py-3.5 bg-black text-white font-semibold text-sm tracking-wide rounded-full hover:bg-neutral-800 transition-all duration-300 transform active:scale-95 shadow-lg">
-                Go Back Home
-            </a>
-        </div>
-    </main>
+<nav id="navbar">
+  <a href="/">
+    <img src="/assets/nav.png" alt="Junaed Somrat">
+  </a>
+</nav>
 
-    <!-- ফুটার সেকশন (মূল সাইটের সাথে মিল রেখে) -->
-    <footer class="bg-[#f0f0f0] border-t border-gray-200 py-12 px-6 w-full">
-        <div class="max-w-xl mx-auto flex flex-col items-start justify-center">
-            <!-- ফুটার ফেভিকন এবং লোগো -->
-            <div class="flex items-center space-x-3 mb-3">
-                <img src="https://junaedsomrat.github.io/assets/favicon_footer.png" alt="Footer Logo" class="w-8 h-8 object-contain" onerror="this.src='https://junaedsomrat.github.io/assets/favicon.png'">
-                <span class="text-xl font-bold tracking-tight text-black">Junaed Somrat</span>
-            </div>
-            
-            <!-- কপিরাইট টেক্সট (সাল অটোমেটিক জেনারেট হবে) -->
-            <p class="text-xs text-gray-500 font-medium">
-                &copy; <span id="current-year">2026</span>, Junaed Somrat all rights reserved
-            </p>
-        </div>
-    </footer>
+<!-- NOTICE -->
 
-    <!-- স্ক্রিপ্ট দিয়ে কারেন্ট ইয়ার আপডেট করা -->
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            const currentYear = new Date().getFullYear();
-            const yearElement = document.getElementById("current-year");
-            if (yearElement) {
-                yearElement.textContent = currentYear;
-            }
-        });
-    </script>
+<div id="noticeBar">
+  <div id="noticeText"></div>
+  <div id="noticeLine"></div>
+</div>
+
+<!-- ERROR CONTENT -->
+
+<main id="main">
+
+  <div class="error-box">
+
+    <div class="error-code">404</div>
+
+    <div class="error-label">ERROR / PAGE NOT FOUND</div>
+
+    <h1 class="error-title">
+      পেজটি খুঁজে পাওয়া যায়নি!
+    </h1>
+
+    <p class="error-description">
+      দুঃখিত, আপনি যে পেজটি খুঁজছেন সেটি হয়তো সরিয়ে ফেলা হয়েছে, এর ঠিকানা পরিবর্তন করা হয়েছে অথবা লিংকটি ভুল।
+    </p>
+
+    <div class="url-box">
+      Requested URL: <span id="requestedURL"></span>
+    </div>
+
+    <div class="actions">
+
+      <a href="/" class="btn btn-primary">
+        Back to Home
+      </a>
+
+      <a href="/blog/" class="btn btn-secondary">
+        Explore Blogs
+      </a>
+
+    </div>
+
+  </div>
+
+</main>
+
+<!-- FOOTER -->
+
+<footer id="footer">
+
+  <div class="footer-inner">
+
+    <div class="footer-about">
+      লেখনীটি পড়ে ভালো লাগলে, উপকারী মনে হলে ফলো করতে পারেন আমার সোশ্যাল মিডিয়া অ্যাকাউন্টগুলো।
+    </div>
+
+    <div class="footer-social">
+
+      <a href="https://m.facebook.com/JunaedIslamSomrat" target="_blank" rel="noopener">
+        <img src="/assets/fb.png" alt="Facebook">
+      </a>
+
+      <a href="https://m.youtube.com/@JunaedSomrat" target="_blank" rel="noopener">
+        <img src="/assets/yt.png" alt="YouTube">
+      </a>
+
+      <a href="https://m.instagram.com/junaed_somrat" target="_blank" rel="noopener">
+        <img src="/assets/insta.png" alt="Instagram">
+      </a>
+
+    </div>
+
+    <div class="footer-links">
+      <a href="/">Home</a>
+      <a href="/about/">About</a>
+      <a href="/contact/">Contact</a>
+      <a href="/privacy/">Privacy Policy</a>
+      <a href="/sitemap.xml">Sitemap</a>
+    </div>
+
+    <div class="footer-bottom">
+
+      <hr style="width:150%;opacity:.2" color="#4F4F4F">
+
+      <div class="copy">
+        © <span id="year"></span> Junaed Islam Somrat. All Rights Reserved.
+      </div>
+
+      <div class="powered">Powered by</div>
+
+      <img class="footer-logo" src="/assets/footer.png" alt="">
+
+    </div>
+
+  </div>
+
+</footer>
+
+<script>
+
+/* REQUESTED URL */
+
+document.getElementById('requestedURL').textContent =
+  location.pathname + location.search;
+
+
+/* FOOTER YEAR */
+
+document.getElementById('year').textContent =
+  new Date().getFullYear();
+
+
+/* NOTICE LOGIC */
+
+const noticeBar = document.getElementById('noticeBar');
+const noticeText = document.getElementById('noticeText');
+const noticeLine = document.getElementById('noticeLine');
+
+fetch('/assets/notice.json', {
+  cache:'no-store'
+})
+.then(r => {
+  if(!r.ok) throw new Error('Notice unavailable');
+  return r.json();
+})
+.then(data => {
+
+  if(
+    !data ||
+    (data.enabled !== 1 &&
+     data.enabled !== '1' &&
+     data.enabled !== true)
+  ) return;
+
+  const text = (data.text || '').trim();
+
+  if(!text) return;
+
+  noticeText.textContent = text;
+
+  noticeBar.classList.add('show');
+  noticeLine.classList.add('run');
+
+  setTimeout(() => {
+
+    noticeBar.classList.remove('show');
+    noticeBar.classList.add('hide');
+
+    setTimeout(() => {
+      noticeBar.classList.remove('hide');
+      noticeLine.classList.remove('run');
+    },400);
+
+  },5000);
+
+})
+.catch(() => {});
+
+</script>
+
+    
+    
 </body>
 </html>
-
