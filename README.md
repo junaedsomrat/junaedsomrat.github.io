@@ -1,7 +1,7 @@
-Junaed Islam Somrat
+### Junaed Islam Somrat
 
 <p align="center">
-  <img src="https://junaedsomrat.github.io/images/banner.jpg" width="100%" alt="Junaed Somrat Banner">
+  <img src="https://junaedsomrat.github.io/assets/nav.jpg" width="100%" alt="Junaed Somrat Banner">
 </p><h2 align="center">Hello, I'm Junaed.</h2><p align="center">
   <i>Content Creator · Writer · Photography Enthusiast</i>
 </p><p align="center">
@@ -10,7 +10,7 @@ Junaed Islam Somrat
   <a href="https://junaedsomrat.github.io/blog">Blogs & Articles</a>
   &nbsp;·&nbsp;
   <a href="https://m.youtube.com/@Khetrofol">YouTube</a>
-</p>---
+</p>
 
 About Me
 
@@ -63,7 +63,7 @@ Connect With Me
   <a href="https://m.youtube.com/@Khetrofol">
     <img src="https://img.shields.io/badge/YouTube-181818?style=flat-square&logo=youtube&logoColor=white" alt="YouTube">
   </a>
-</p>---
+</p>
 
 <p align="center">
   <b>Junaed Islam Somrat</b>
