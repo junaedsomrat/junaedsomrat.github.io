@@ -1,7 +1,7 @@
 ### Junaed Islam Somrat
 
 <p align="center">
-  <img src="https://junaedsomrat.github.io/assets/nav.jpg" width="100%" alt="Junaed Somrat Banner">
+  <img src="https://junaedsomrat.github.io/assets/nav.png" width="100%" alt="Junaed Somrat Banner">
 </p><h2 align="center">Hello, I'm Junaed.</h2><p align="center">
   <i>Content Creator · Writer · Photography Enthusiast</i>
 </p><p align="center">
